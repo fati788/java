@@ -1,3 +1,4 @@
+package src.Tema2.src;
 public class EjemploAcumulador {
 
     public static void main(String[] args) {

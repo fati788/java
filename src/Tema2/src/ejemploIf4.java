@@ -1,3 +1,4 @@
+package src.Tema2.src;
 import java.util.Scanner;
 
 public class ejemploIf4 {
