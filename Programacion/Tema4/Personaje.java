@@ -97,6 +97,10 @@ public class Personaje {
         this.clase = "Humano";
         this.sexo = "nodefinido";
         this.vida = 10;
+        this.arma= new Arma();
 
+    }
+    public void golpear(Personaje personaje) {
+        this.arma.golpear(personaje);
     }
 }
