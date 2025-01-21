@@ -14,5 +14,6 @@ public class TestSteamJuego {
         System.out.println(jugador1.getMediaJugadorDiarios());
         System.out.println(jugador2.getMediaJugadorDiarios());
         System.out.println(jugador3.getMediaJugadorDiarios());
+
     }
 }

@@ -19,11 +19,8 @@ public class Incidencia {
     }
 
     public  void resuelve() {
-        if (estado.equals( Estado.RESUELTA)){
+        this.estado= Estado.RESUELTA;
             Incidencia.pedientes--;
-
-        }
-
     }
 
     @Override
