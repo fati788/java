@@ -63,10 +63,5 @@ public class TestTelefonoMovil {
         //Enonces podemos usar el iquales si quieremos comparar los proporidades
         // y si quieremos comparar la refeiencia de la momoria usamos el==
 
-
-
-
-
-
     }
 }
