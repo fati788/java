@@ -1,4 +1,4 @@
-package Programacion.Practica1OPP;
+package Programacion.Practica1OPP.Ejercicio1;
 
 public class Monstruo {
     enum Clase{GOBLIN , TROLL , SKRALL , DEMONIO , FANTASMA}
@@ -85,4 +85,11 @@ public class Monstruo {
         return false;
 
     }
+    /* Un método golpear(Jugador jugador): reduce la salud del jugador tanto como sea el valor de la propiedad
+puntosD del monstruo. Para reducir la salud debes llamar al método correspondiente de la clase Jugador.
+*/
+    public  void golpear(Jugador jugador){
+        jugador.reducirVida(puntosD);
+    }
 }
+

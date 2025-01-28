@@ -1,4 +1,4 @@
-package Programacion.Practica1OPP;
+package Programacion.Practica1OPP.Ejercicio1;
 
 public class Jugador {
     enum  Clase{MAGO , BRUJO , BARBARO , CABALLERO}
@@ -8,7 +8,7 @@ public class Jugador {
     private  Integer nivel ;
     private  Integer experiencia;
     private  Double salud;
-    private  Arma armaDerecha;
+    private Arma armaDerecha;
     private  Arma armaIzquierda;
 
     public Jugador(String nombre, Clase clase) {
@@ -90,7 +90,7 @@ public class Jugador {
         sb.append('}');
         return sb.toString();
     }
-    public void subirNivel( Jugador jugador) {
+    public void subirNivel() {
         if (this.nivel<10){
             this.nivel++;
             this.salud += Math.pow(2.5, this.nivel);
@@ -149,10 +149,15 @@ public class Jugador {
 
             }
         }
+        if (monstruo.getSalud() <=0){
+            this.experiencia +=10* monstruo.getNivel();
+
+        }
+        if (this.experiencia %100==0 ){
+            this.subirNivel();
+        }
 
     }
-    public void subirExperiencia(Monstruo monstruo){
-
 
     }
 
@@ -161,4 +166,3 @@ public class Jugador {
 
 
 
-}

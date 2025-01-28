@@ -1,4 +1,4 @@
-package Programacion.Practica1OPP;
+package Programacion.Practica1OPP.Ejercicio1;
 
 public class Arma {
     enum Tipo { ESPADA , HACHA , BASTON , ARCO }
