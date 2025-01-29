@@ -62,6 +62,7 @@ public class Mago {
     /**
      * El metodo primero busca que el mago tenga un Hechizo con el mismo nombre
      * que se le pasa scomo String . Si no lo tiene duevelve false y acaba .
+     *comprobar  si el mago tiene energia suficiete para lansar el hechizo
      * Si el mago si tiene ese Hechizo compprueba (esEfectivo) que puede suiperar al prueba .
      * Si el Hechizo es efectivo suma le recompensa de la prueba ala energia del mago
      * y devuelve true
@@ -76,7 +77,7 @@ public class Mago {
             return false;
         }else {
             //coprobarsi el mgo
-            if (!(this.getEnergiaMagica()>= miHechizo.getEnergiaNecessaria())) {
+            if (this.getEnergiaMagica()<= miHechizo.getEnergiaNecessaria()) {
                 return false;
             }else {
                 if (!miHechizo.esEfectivo(prueba)){
