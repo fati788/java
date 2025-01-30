@@ -102,4 +102,11 @@ public class NotasCurso {
     public  Double CalcularNotaFinal(){
         return (this.nota1Ev+this.nota2Ev+this.nota3Ev)/3;
     }
+    public boolean aprobado(){
+        if (this.getNotaFinal()>=5){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

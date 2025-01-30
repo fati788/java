@@ -76,71 +76,30 @@ public class Mago {
         if (miHechizo == null){
             return false;
         }else {
-            //coprobarsi el mgo
+
             if (this.getEnergiaMagica()<= miHechizo.getEnergiaNecessaria()) {
                 return false;
             }else {
-                if (!miHechizo.esEfectivo(prueba)){
+                if (!miHechizo.esEfectivo(prueba)) {
                     this.setEnergiaMagica(this.getEnergiaMagica() - prueba.getRecompensa());
                     return false;
 
-                }else {
-                    this.recargarEnergia(this.getEnergiaMagica()+ prueba.getRecompensa());
+                } else {
+                    this.recargarEnergia(this.getEnergiaMagica() + prueba.getRecompensa());
                     return true;
                 }
 
-
-
             }
-
-
         }
 
     }
-   /* public void lanzarHechizo2(String nombreHechizo , Prueba prueba) throws Exception{
-        Hechizo miHechizo = this.buscar(nombreHechizo);
-        if (miHechizo == null){
-            throw new Exception("Hechizo no encontrado");
-        }else {
-            //coprobarsi el mgo
-            if (!(this.getEnergiaMagica()>= miHechizo.getEnergiaNecessaria())) {
-            sout(""el mago no tiene energia para lanzar hechizo )
 
-            }else {
-                if (!miHechizo.esEfectivo(prueba)){
-                    this.setEnergiaMagica(this.getEnergiaMagica() - prueba.getRecompensa());
-                    throw new Exception("Hechizo no efectivo");
+    /**
+     * Buscar si el hechizo esta en la lista
+     * @param nombreHechizo
+     * @return
+     */
 
-
-                }else {
-                    this.recargarEnergia(this.getEnergiaMagica()+ prueba.getRecompensa());
-
-
-                }
-
-
-
-            }
-
-
-        }
-
-    }*/
-   /* public boolean lanzarHechizo(String nombreHechizo , Prueba prueba){
-        Hechizo miHechizo = this.buscar(nombreHechizo);
-
-        if (miHechizo == null ){
-            return false;
-        }else {
-            if (!miHechizo.esEfectivo(prueba)){
-                this.setEnergiaMagica(this.getEnergiaMagica() - prueba.getRecompensa());
-                return false;
-            }else {
-                this.setEnergiaMagica(this.getEnergiaMagica() + prueba.getRecompensa());
-                return true ;
-            }
-        }
-    }*/
     public Hechizo buscar (String nombreHechizo){
         for(Hechizo hechizo : hechizos){
             if (hechizo.getNombre().equalsIgnoreCase(nombreHechizo)){
@@ -152,7 +111,7 @@ public class Mago {
     }
 
     /**
-     * Suma
+     * Aumenta la energía del mago (sin superar el máximo de 100)
      * @param cantidad
      */
     public void recargarEnergia(int cantidad){
@@ -161,8 +120,8 @@ public class Mago {
 
          this.setEnergiaMagica(100);
         }else {
-            //this.getEnergiaMagica()+=cantidad;
-            //this.setEnergiaMagica(this.getEnergiaMagica()+cantidad);
+
+            this.setEnergiaMagica(this.getEnergiaMagica()+cantidad);
         }
     }
 }

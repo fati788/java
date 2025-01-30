@@ -4,7 +4,7 @@ public class TestJuego {
     public static void main(String[] args) {
 
         Mago mago = new Mago("Ana" , 100);
-        Hechizo hechizo1 = new Hechizo("bola de fuego  " , 20 ,7);
+        Hechizo hechizo1 = new Hechizo("Bola de fuego  " , 20 ,7);
         Hechizo hechizo2 = new Hechizo("Escuedo magico " , 15 ,5);
         Hechizo hechizo3 = new Hechizo("Rayo electrico " , 25 ,9);
 
@@ -18,21 +18,31 @@ public class TestJuego {
 
         boolean exito ;
 
-        System.out.println("El mago usa bola de fuego contra " + prueba1.getDescrepcion());
+        System.out.println("El mago usa Bola de fuego contra " + prueba1.getDescrepcion());
         exito= mago.lanzarHechizo("bola de fuego  " , prueba1);
-        if (exito==true){
-            System.out.println("gana el prueba");
+        if (exito){
+            System.out.println(" El Bola de fuego  gana " + prueba1.getDescrepcion());
         }else {
-            System.out.println("no gana el prueba");
+            System.out.println(" El Bola de fuego  No gana " + prueba1.getDescrepcion());
         }
+
+
+        System.out.println("El mago usa Escuedo magico contra  " + prueba2.getDescrepcion());
         exito= mago.lanzarHechizo("Escuedo magico " , prueba2);
+        if (exito){
+            System.out.println(" El Escuedo magico  gana " + prueba2.getDescrepcion());
+        }else {
+            System.out.println(" Escuedo magico  No gana " + prueba2.getDescrepcion());
+        }
+
+
+        System.out.println("El mago usa Rayo electrico conta " + prueba3.getDescrepcion());
         exito= mago.lanzarHechizo("Rayo electrico " , prueba3);
-
-      /*  try {
-            System.out.println("El mago usa bola de fuego contra " + prueba1.getDescrepcion());
-            mago.lanzarHechizo("bola de fuego  " , prueba1);
-
-
-        }*/
+        if (exito){
+            System.out.println(" Rayo electrico  gana " + prueba3.getDescrepcion());
+        }else {
+            System.out.println(" Rayo electrico  No gana " + prueba3.getDescrepcion());
+        }
     }
+
 }

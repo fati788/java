@@ -90,12 +90,23 @@ public class Jugador {
         sb.append('}');
         return sb.toString();
     }
+
+    /**
+     * Subir el nivel si es menor que 10
+     */
     public void subirNivel() {
         if (this.nivel<10){
             this.nivel++;
             this.salud += Math.pow(2.5, this.nivel);
         }
     }
+
+    /**
+     * asignará este arma a onos de los manos y duevelve true
+     * Si están ocupados los dos devolverá false
+     * @param arma
+     * @return
+     */
     public  boolean equipqr(Arma arma){
         boolean equipqr=false;
         if (arma.getDosManos()==true){
@@ -118,11 +129,22 @@ public class Jugador {
         }
         return equipqr;
     }
+
+    /**
+     * subir la salud del jugador con valor de puntos si es menor que 10000
+     * @param puntos
+     */
     public void tomarPocion(int puntos) {
         if (this.salud<10000){
             this.salud+=puntos;
         }
     }
+
+    /**
+     * reducir la vida del jugador tanto como indiqua los puntos de daño
+     * @param puntosD
+     * @return
+     */
     public boolean reducirVida(int puntosD) {
 
         this.salud-=puntosD;
@@ -131,13 +153,13 @@ public class Jugador {
             return true;
         }
         return false;
-
     }
 
-
-
-
-
+    /**
+     * reduce la salud del monstruo tanto como sea el valor de la
+     * propiedad puntosD de las armas para eso usamos la method reducirVida
+     * @param monstruo
+     */
     public void golear(Monstruo monstruo){
         if (this.getArmaDerecha()!=null){
             monstruo.reducirVida(this.getArmaDerecha().getPuntosD());
@@ -145,8 +167,6 @@ public class Jugador {
                 if (this.getArmaIzquierda()!=null){
                     monstruo.reducirVida(this.getArmaIzquierda().getPuntosD());
                 }
-
-
             }
         }
         if (monstruo.getSalud() <=0){
