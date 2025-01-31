@@ -69,7 +69,7 @@ public class Monstruo {
         sb.append('}');
         return sb.toString();
     }
-    public void subirNivel( Monstruo monstruo) {
+    public void subirNivel() {
         if (this.nivel<10){
             this.nivel++;
             this.salud += Math.pow(2.5, this.nivel);

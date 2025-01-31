@@ -107,13 +107,13 @@ public class Jugador {
      * @param arma
      * @return
      */
-    public  boolean equipqr(Arma arma){
-        boolean equipqr=false;
-        if (arma.getDosManos()==true){
+    public  boolean equipar(Arma arma){
+        boolean equipar=false;
+        if (arma.getDosManos()){
             if (this.armaIzquierda==null && this.armaDerecha==null){
                 this.armaDerecha=arma;
                 this.armaIzquierda=arma;
-                equipqr= true;
+                equipar= true;
             }
 
         }else {
@@ -124,10 +124,10 @@ public class Jugador {
                 this.armaIzquierda=arma;
             }
         }
-        if (equipqr==false){
+        if (!equipar){
             System.out.println("No se puede equiprar el arma los dos manos son equipados");
         }
-        return equipqr;
+        return equipar;
     }
 
     /**
@@ -137,6 +137,9 @@ public class Jugador {
     public void tomarPocion(int puntos) {
         if (this.salud<10000){
             this.salud+=puntos;
+            if (this.salud>10000){
+                this.salud=10000.0;
+            }
         }
     }
 
@@ -160,7 +163,7 @@ public class Jugador {
      * propiedad puntosD de las armas para eso usamos la method reducirVida
      * @param monstruo
      */
-    public void golear(Monstruo monstruo){
+    public void golpear(Monstruo monstruo){
         if (this.getArmaDerecha()!=null){
             monstruo.reducirVida(this.getArmaDerecha().getPuntosD());
             if (! this.getArmaDerecha().getDosManos()){
