@@ -71,26 +71,26 @@ public class Jugador extends Personaje {
      * @param arma
      * @return
      */
-    public  boolean equipar(Arma arma){
-        boolean equipdor=false;
-        if (arma.getDosManos()){
-            if (this.armaIzquierda==null && this.armaDerecha==null){
-                this.armaDerecha=arma;
-                this.armaIzquierda=arma;
-                equipdor= true;
+
+    public boolean equipar(Arma arma) {
+        if (arma.getDosManos()) {
+            if (armaDerecha == null && armaIzquierda == null) {
+                armaDerecha = arma;
+                armaIzquierda = arma;
+                return true;
             }
-
-        }else {
-            if (this.armaIzquierda!=null && this.armaDerecha ==null){
-                this.armaDerecha=arma;
-
-            } else if (this.armaIzquierda==null && this.armaDerecha !=null) {
-                this.armaIzquierda=arma;
+        } else {
+            if (armaDerecha == null) {
+                armaDerecha = arma;
+                return true;
+            } else if (armaIzquierda == null) {
+                armaIzquierda = arma;
+                return true;
             }
         }
-
-        return equipdor;
+        return false;
     }
+
 
     /**
      * subir la salud del jugador con valor de puntos si es menor que 10000
