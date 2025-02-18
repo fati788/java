@@ -1,4 +1,4 @@
-package Programacion.Practica2OPP.Ejercicio2;
+package Programacion.Practica2OPP.Ejercicio1;
 
 public abstract class Personaje {
 
@@ -7,10 +7,10 @@ public abstract class Personaje {
     protected   Double salud;
 
 
-    public Personaje(String nombre) {
+    public Personaje(String nombre, Integer nivel, Double salud) {
         this.nombre = nombre;
-        this.nivel=1;
-        this.salud=100.0;
+        this.nivel = nivel;
+        this.salud = salud;
     }
 
     public String getNombre() {

@@ -1,4 +1,4 @@
-package Programacion.Practica2OPP.Ejercicio1;
+package Programacion.Practica2OPP.Ejercicio2;
 
 public class Contrarrelojista extends Ciclista {
 

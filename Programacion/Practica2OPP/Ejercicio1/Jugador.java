@@ -1,4 +1,4 @@
-package Programacion.Practica2OPP.Ejercicio2;
+package Programacion.Practica2OPP.Ejercicio1;
 
 public class Jugador extends Personaje {
 
@@ -9,7 +9,7 @@ public class Jugador extends Personaje {
     private  Arma armaIzquierda;
 
     public Jugador(String nombre, Clase clase) {
-        super(nombre);
+        super(nombre ,1,200.0);
         this.clase = clase;
        this.experiencia=0;
         this.armaDerecha=null;

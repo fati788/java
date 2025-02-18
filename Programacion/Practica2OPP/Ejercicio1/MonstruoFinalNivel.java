@@ -1,4 +1,4 @@
-package Programacion.Practica2OPP.Ejercicio2;
+package Programacion.Practica2OPP.Ejercicio1;
 
 public class MonstruoFinalNivel extends Monstruo{
 
@@ -25,18 +25,22 @@ public class MonstruoFinalNivel extends Monstruo{
         sb.append("nombre='").append(nombre).append('\'');
         sb.append(", nivel=").append(nivel);
         sb.append(", salud=").append(salud);
+        sb.append(", clase=").append(clase);
+        sb.append(", puntosD=").append(puntosD);
         sb.append(", golpeEspecial=").append(golpeEspecial);
         sb.append(", UsosGolpeEspecial=").append(UsosGolpeEspecial);
         sb.append('}');
         return sb.toString();
     }
+
+  @Override
     protected  void golpear(Personaje persona){
         if (this.UsosGolpeEspecial>0){
             persona.reducirVida(this.golpeEspecial);
            this.UsosGolpeEspecial--;
 
+        }else {
+            super.golpear(persona);
         }
-
-
     }
 }
