@@ -15,8 +15,9 @@ public class TestJuego {
             if (jugador.getSalud()<=0 ){
                 break;
             }
-            System.out.println(partida  );
+            System.out.println(partida);
         }
+
         System.out.println(partida);
         if (jugador.getSalud()>0){
             System.out.println("El jugador gana la partida");
