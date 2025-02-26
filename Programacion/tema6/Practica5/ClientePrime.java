@@ -9,7 +9,7 @@ public class ClientePrime extends Cliente {
 
     public ClientePrime(String nombre, String dni, String email , Double precioMensualHijo) {
         super(nombre, dni, email);
-
+        this.precioMensoal =3.0;
     }
 
     @Override

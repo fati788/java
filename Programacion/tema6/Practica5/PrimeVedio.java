@@ -24,7 +24,7 @@ public class PrimeVedio {
         }
     }
     public void ver(Multimedia m , Cliente c ){
-        if (c instanceof ClientePrimePro) {
+        if (!c.esPro()) {
                 this.ganancias +=m.getPrecio();
 
         }
@@ -36,5 +36,13 @@ public class PrimeVedio {
 
         }
         return totalGanancias;
+    }
+
+    public ArrayList<Multimedia> getCatalogo() {
+        return catalogo;
+    }
+
+    public ArrayList<Cliente> getSuscriptores() {
+        return suscriptores;
     }
 }
