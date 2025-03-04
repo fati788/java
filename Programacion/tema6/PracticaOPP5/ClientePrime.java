@@ -1,4 +1,4 @@
-package Programacion.tema6.Practica5;
+package Programacion.tema6.PracticaOPP5;
 
 public class ClientePrime extends Cliente {
     private  static final Double precioMensualHijo = 3.0;
@@ -9,7 +9,7 @@ public class ClientePrime extends Cliente {
 
     public ClientePrime(String nombre, String dni, String email , Double precioMensualHijo) {
         super(nombre, dni, email);
-        this.precioMensoal =3.0;
+
     }
 
     @Override

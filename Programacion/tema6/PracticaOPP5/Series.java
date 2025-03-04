@@ -1,4 +1,4 @@
-package Programacion.tema6.Practica5;
+package Programacion.tema6.PracticaOPP5;
 
 import java.util.ArrayList;
 
@@ -33,9 +33,6 @@ public class Series extends  Multimedia{
     public void addTemporada(Temporada temporada) {
         temporada.setSerie(this);
         this.temporadas.add(temporada);
-
-
-
     }
     public void delTemporada(Temporada temporada) {
        temporadas.remove(temporada);

@@ -1,4 +1,4 @@
-package Programacion.tema6.Practica5;
+package Programacion.tema6.PracticaOPP5;
 
 public class Episodio {
     private String titulo;
@@ -50,4 +50,5 @@ public class Episodio {
         sb.append('}');
         return sb.toString();
     }
+
 }

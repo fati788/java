@@ -1,4 +1,4 @@
-package Programacion.tema6.Practica5;
+package Programacion.tema6.PracticaOPP5;
 
 import java.util.ArrayList;
 
@@ -14,19 +14,21 @@ public class PrimeVedio {
 
     }
     public void addSuscriptor(Cliente cliente) {
-      if (!suscriptores.contains(cliente)) {
+     // if (!suscriptores.contains(cliente)) {
           suscriptores.add(cliente);
-      }
+      //}
     }
     public void addCatalogo(Multimedia multimedia) {
-        if (!catalogo.contains(multimedia)) {
+      //  if (!catalogo.contains(multimedia)) {
             catalogo.add(multimedia);
-        }
+       // }
     }
     public void ver(Multimedia m , Cliente c ){
-        if (!c.esPro()) {
-                this.ganancias +=m.getPrecio();
+        if (m.plus) {
+            if (!c.esPro()) {
+                this.ganancias += m.getPrecio();
 
+            }
         }
     }
     public Double getGanancias() {
@@ -37,7 +39,6 @@ public class PrimeVedio {
         }
         return totalGanancias;
     }
-
     public ArrayList<Multimedia> getCatalogo() {
         return catalogo;
     }

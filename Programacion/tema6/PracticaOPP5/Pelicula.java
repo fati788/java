@@ -1,4 +1,4 @@
-package Programacion.tema6.Practica5;
+package Programacion.tema6.PracticaOPP5;
 
 public class Pelicula extends Multimedia{
    private Integer duracion;
