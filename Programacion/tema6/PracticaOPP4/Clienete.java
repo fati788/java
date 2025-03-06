@@ -1,4 +1,4 @@
-package Programacion.tema6.PracticaOPP5;
+package Programacion.tema6.PracticaOPP4;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package Programacion.tema6.PracticaOPP5;
+package Programacion.tema6.PracticaOPP4;
 
 public enum Genero {
     THRILLER,ACCION,AVENTURASSS,ROMATICA,TERROR,INFANTIL,SCIFI,DRAMA,COMEDIA,ORIENTAL

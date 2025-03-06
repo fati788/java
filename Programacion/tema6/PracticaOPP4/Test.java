@@ -1,4 +1,4 @@
-package Programacion.tema6.PracticaOPP5;
+package Programacion.tema6.PracticaOPP4;
 
 public class Test {
     public static void main(String[] args) {
