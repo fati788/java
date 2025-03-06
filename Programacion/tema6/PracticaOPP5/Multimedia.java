@@ -3,44 +3,34 @@ package Programacion.tema6.PracticaOPP5;
 import java.util.Objects;
 
 public class Multimedia {
-    protected static long autocremento =1;
-    protected long codigo;
+    protected static Long autocremento=1L;
+    protected Long codigo;
     protected String titulo;
-    protected  Boolean plus;
-    protected Double precio;
+    protected Boolean plus;
+    protected Double precion;
     protected Genero genero;
 
+    //constructor por defecto
     public Multimedia() {
-        this.titulo = "";
-        this.plus = false;
-        this.precio = 0.0;
-       this.autocremento++;
-       this.codigo = autocremento;
-
+        autocremento++;
+        this.codigo = autocremento;
+        this.titulo="";
+        this.plus=false;
+        this.precion=0.0;
+        this.genero=null;
     }
-
-    public Multimedia(String titulo, Boolean plus, Double precio) {
+   //constructor pcon parametros
+    public Multimedia(String titulo, Boolean plus, Double precion) {
         this.titulo = titulo;
         this.plus = plus;
-        this.precio = precio;
-        this.autocremento++;
+        this.precion = precion;
+        autocremento++;
         this.codigo = autocremento;
     }
 
-    public static long getAutocremento() {
-        return autocremento;
-    }
-
-    public static void setAutocremento(long autocremento) {
-        Multimedia.autocremento = autocremento;
-    }
-
-    public long getCodigo() {
+    //getter y setter
+    public Long getCodigo() {
         return codigo;
-    }
-
-    public void setCodigo(long codigo) {
-        this.codigo = codigo;
     }
 
     public String getTitulo() {
@@ -59,12 +49,12 @@ public class Multimedia {
         this.plus = plus;
     }
 
-    public Double getPrecio() {
-        return precio;
+    public Double getPrecion() {
+        return precion;
     }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
+    public void setPrecion(Double precion) {
+        this.precion = precion;
     }
 
     public Genero getGenero() {
@@ -73,18 +63,6 @@ public class Multimedia {
 
     public void setGenero(Genero genero) {
         this.genero = genero;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("Multimedia{");
-        sb.append("codigo=").append(codigo);
-        sb.append(", titulo='").append(titulo).append('\'');
-        sb.append(", plus=").append(plus);
-        sb.append(", precio=").append(precio);
-        sb.append(", genero=").append(genero);
-        sb.append('}');
-        return sb.toString();
     }
 
     @Override
@@ -97,5 +75,17 @@ public class Multimedia {
     @Override
     public int hashCode() {
         return Objects.hashCode(codigo);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Multimedia{");
+        sb.append("codigo=").append(codigo);
+        sb.append(", titulo='").append(titulo).append('\'');
+        sb.append(", plus=").append(plus);
+        sb.append(", precion=").append(precion);
+        sb.append(", genero=").append(genero);
+        sb.append('}');
+        return sb.toString();
     }
 }

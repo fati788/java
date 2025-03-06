@@ -1,20 +1,21 @@
 package Programacion.tema6.PracticaOPP5;
 
 public class Episodio {
+
     private String titulo;
     private String duracion;
     private Temporada temporada;
 
+    public Episodio() {
+        this.titulo = "";
+        this.duracion = "";
+        this.temporada = null;
+    }
+
     public Episodio(String titulo, String duracion) {
         this.titulo = titulo;
         this.duracion = duracion;
-        this.temporada = new Temporada();
-    }
 
-    public Episodio() {
-        this.temporada = null;
-        this.titulo = "";
-        this.duracion = "";
     }
 
     public String getTitulo() {
@@ -46,9 +47,8 @@ public class Episodio {
         final StringBuffer sb = new StringBuffer("Episodio{");
         sb.append("titulo='").append(titulo).append('\'');
         sb.append(", duracion='").append(duracion).append('\'');
-        sb.append(", temporada=").append(temporada);
+        sb.append(", temporada=").append(temporada.getNumero());
         sb.append('}');
         return sb.toString();
     }
-
 }

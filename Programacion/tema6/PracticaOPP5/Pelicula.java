@@ -1,14 +1,11 @@
 package Programacion.tema6.PracticaOPP5;
 
-public class Pelicula extends Multimedia{
-   private Integer duracion;
+public class Pelicula extends Multimedia {
 
-    public Pelicula() {
-        super();
-    }
+    private Integer duracion;
 
-    public Pelicula(String titulo, Boolean plus, Double precio , Integer duracion) {
-        super(titulo, plus, precio);
+    public Pelicula(String titulo, Boolean plus, Double precion,Integer duracion) {
+        super(titulo, plus, precion);
         this.duracion = duracion;
     }
 
@@ -26,7 +23,7 @@ public class Pelicula extends Multimedia{
         sb.append("codigo=").append(codigo);
         sb.append(", titulo='").append(titulo).append('\'');
         sb.append(", plus=").append(plus);
-        sb.append(", precio=").append(precio);
+        sb.append(", precion=").append(precion);
         sb.append(", genero=").append(genero);
         sb.append(", duracion=").append(duracion);
         sb.append('}');

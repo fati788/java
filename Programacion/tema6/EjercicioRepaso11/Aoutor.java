@@ -1,18 +1,19 @@
-package Programacion.tema6.Ejercico1ClaseRepaso;
+package Programacion.tema6.EjercicioRepaso11;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Autor {
+public class Aoutor {
 
     private String nombre;
     private String apellido;
     private String email;
     private LocalDate fechaNacimiento;
     private Rol rol;
-    private ArrayList<Comic> comics;
+    private ArrayList<Comic>comics;
 
-    public Autor(String nombre, String apellido, String email, LocalDate fechaNacimiento, Rol rol) {
+
+    public Aoutor(String nombre, String apellido, String email, LocalDate fechaNacimiento, Rol rol) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -61,9 +62,13 @@ public class Autor {
         this.rol = rol;
     }
 
+    public ArrayList<Comic> getComics() {
+        return comics;
+    }
+
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Autor{");
+        final StringBuffer sb = new StringBuffer("Aoutor{");
         sb.append("nombre='").append(nombre).append('\'');
         sb.append(", apellido='").append(apellido).append('\'');
         sb.append(", email='").append(email).append('\'');
@@ -73,20 +78,16 @@ public class Autor {
         sb.append('}');
         return sb.toString();
     }
+    public void addComic(Comic comic) {
+        if (!comics.contains(comic)) {
+            this.comics.add(comic);
+            comic.addAutores(this);
 
-    public ArrayList<Comic> getComics() {
-        return comics;
-    }
-    public void  addComic(Comic comic) {
-         if (!comics.contains(comic)) {
-             comic.addAutor(this);
-             this.comics.add(comic);
-         }
-
+        }
     }
     public void removeComic(Comic comic) {
-        comic.removeAutor(this);
+        comic.removeAutores(this);
         this.comics.remove(comic);
-
     }
+
 }
