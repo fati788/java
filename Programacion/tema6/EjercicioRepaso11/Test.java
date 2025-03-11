@@ -3,7 +3,7 @@ package Programacion.tema6.EjercicioRepaso11;
 import java.time.LocalDate;
 
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         TiendaComics miTienda = new TiendaComics();
 
         Aoutor aoutor1 = new Aoutor("Ana" ,"Garcia" ,"na@gmail.com" , LocalDate.of(2022,6,7),Rol.GUIONISTA);
@@ -25,8 +25,13 @@ public class Test {
         Venta venta1 = new Venta(cliente1,anime,LocalDate.now());
         Venta venta2 = new Venta(cliente2,anime,LocalDate.now());
 
-        miTienda.AddVenta(venta1);
-        miTienda.AddVenta(venta2);
+
+        try {
+            miTienda.AddVenta(venta2);
+            miTienda.AddVenta(venta1);
+        } catch (ExepcionStock e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println(miTienda);
     }
 }

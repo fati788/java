@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 
-public class TiendaComics {
+public class
+TiendaComics {
 
     private ArrayList<Comic>comics;
      private ArrayList<Venta>ventas;
@@ -43,13 +44,13 @@ public class TiendaComics {
     public ArrayList<Venta> getVentas() {
         return ventas;
     }
-    public  void AddVenta(Venta venta) {
+    public  void AddVenta(Venta venta) throws ExepcionStock{
         if (venta.getComic().getNumeroEjemplares()>=1) {
                 ventas.add(venta);
                 venta.getComic().setNumeroEjemplares(venta.getComic().getNumeroEjemplares()-1);
-                if (venta.getComic().getNumeroEjemplares()==0) {
-                  ExepcionStock ex = new ExepcionStock();
-                }
+
+        }else  if (venta.getComic().getNumeroEjemplares()==0) {
+            ExepcionStock ex = new ExepcionStock("No quedan mas ejemplares de este comic");
         }
     }
     public void ListarVentas() {
