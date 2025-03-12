@@ -83,7 +83,7 @@ public class ReservaVuelo {
             Asiento asiento = this.vuelo.buscarAsientoDisponible(tipoA);
                 Pasajero pasajeroColonado = new Pasajero(pasajero);
                this.getVuelo().ocuparAsiento(asiento, pasajeroColonado);
-                   this.pasajeros.add(pasajeroColonado);
+                   this.addPasajero(pasajeroColonado);
                    return true;
         }
 

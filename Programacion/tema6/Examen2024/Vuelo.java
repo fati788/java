@@ -124,6 +124,7 @@ public class Vuelo {
     public int hashCode() {
         return Objects.hashCode(codigo);
     }
+
     public int verificarDisponibilidad(TipoAsiento tipoAsiento){
         int disponibilidad = 0;
         for (Asiento asiento : asientos){

@@ -21,7 +21,7 @@ public class AsientoBusiness extends Asiento {
     public String toString() {
         final StringBuffer sb = new StringBuffer("AsientoBusiness{");
         sb.append("codigo=").append(this.getCodigo());
-        //sb.append(", pasajero=").append(this.getPasajero().getDniPasaporte());
+        sb.append(", pasajero=").append(this.getPasajero()==null ? "X" :this.getPasajero().getDniPasaporte());
         sb.append(", precioBase=").append(this.CalcularPrecio());
         sb.append(", tipo=").append(tipo);
         sb.append(", comida=").append(comida);

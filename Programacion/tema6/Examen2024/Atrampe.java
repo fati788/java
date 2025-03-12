@@ -24,8 +24,8 @@ public class Atrampe {
      public void addVuelo(Vuelo vuelo) {
         this.vuelos.add(vuelo);
      }
-     public boolean crearReserva(Vuelo vuelo , ArrayList<Pasajero>pasajeros,TipoTarifa tipoTarifa,TipoAsiento tipoAsiento) {
 
+     public boolean crearReserva(Vuelo vuelo , ArrayList<Pasajero>pasajeros,TipoTarifa tipoTarifa,TipoAsiento tipoAsiento) {
         if (vuelo.verificarDisponibilidad(tipoAsiento)>=pasajeros.size()){
             ReservaVuelo reservaVuelo = new ReservaVuelo(vuelo, tipoTarifa, tipoAsiento);
             for (Pasajero pasajero : pasajeros) {

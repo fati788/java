@@ -18,18 +18,12 @@ TiendaComics {
         return comics;
     }
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("TiendaComics{");
-        sb.append("comics=").append(comics);
-        sb.append(", ventas=").append(ventas);
-        sb.append('}');
-        return sb.toString();
+    public ArrayList<Venta> getVentas() {
+        return ventas;
     }
-
     public void addComic(Comic comic) {
         if (!comics.contains(comic)) {
-            comics.add(comic);
+           this.comics.add(comic);
         }
     }
     public void removeComic(Comic comic) {
@@ -37,26 +31,51 @@ TiendaComics {
     }
     public void ListarComics() {
         for (Comic comic : comics) {
-            System.out.println(comic);
+            System.out.println(comic.getTitulo());
+            for (Aoutor autor : comic.getAutores()) {
+                System.out.println(autor.getNombre() +" "
+                        + autor.getApellido()+" " +
+                        autor.getRol());
+            }
+            System.out.println();
         }
     }
-
-    public ArrayList<Venta> getVentas() {
-        return ventas;
-    }
-    public  void AddVenta(Venta venta) throws ExepcionStock{
-        if (venta.getComic().getNumeroEjemplares()>=1) {
-                ventas.add(venta);
-                venta.getComic().setNumeroEjemplares(venta.getComic().getNumeroEjemplares()-1);
-
-        }else  if (venta.getComic().getNumeroEjemplares()==0) {
-            ExepcionStock ex = new ExepcionStock("No quedan mas ejemplares de este comic");
+   public boolean addVenta(Venta venta) throws ExepcionStock {
+        for (LineaCompra linea : venta.getLineas()) {
+            if (linea.getComic().getNumeroEjemplares()<linea.getCantidad()){
+                return false;
+            }
         }
-    }
+        //
+       this.ventas.add(venta);
+        for (LineaCompra linea : venta.getLineas()) {
+            linea.getComic().setNumeroEjemplares(linea.getComic().getNumeroEjemplares()-linea.getCantidad());
+            if (linea.getComic().getNumeroEjemplares()==0){
+                throw new ExepcionStock("No hay stock sisponible de este comic");
+            }
+        }
+        return true;
+
+   }
+
     public void ListarVentas() {
-        for (Venta venta : ventas) {
-            System.out.println(venta);
+        for (Venta venta : this.ventas) {
+            System.out.println(venta.getCliente().getDni());
+            System.out.println(venta.getFechaVenta());
+            for (LineaCompra linea : venta.getLineas()) {
+                System.out.println(linea.getComic().getTitulo() + " "
+                + linea.getCantidad() );
+            }
         }
+    }
+    public ArrayList<Comic>buscarComic(LocalDate desde , LocalDate hasta) {
+        ArrayList<Comic> comics = new ArrayList<>();
+        for (Comic comic : this.comics) {
+            if (comic.getFecha().isAfter(desde)&& comic.getFecha().isBefore(hasta)) {
+                comics.add(comic);
+            }
+        }
+        return comics;
     }
 
 }

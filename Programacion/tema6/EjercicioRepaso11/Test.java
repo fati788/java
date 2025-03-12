@@ -9,7 +9,7 @@ public class Test {
         Aoutor aoutor1 = new Aoutor("Ana" ,"Garcia" ,"na@gmail.com" , LocalDate.of(2022,6,7),Rol.GUIONISTA);
         Aoutor aoutor2 = new Aoutor("Fati" ,"Garcia" ,"na@gmail.com" , LocalDate.of(2045,6,7),Rol.DIBUJANTE);
 
-        Comic anime = new Anime("NONO",LocalDate.of(1999,3,6),10.5,123,1,"Seria",12);
+        Comic anime = new Anime("NONO",LocalDate.of(1999,3,6),10.5,123,12,"Seria",12);
         Comic novelaGrafica= new NovelaGrafica("FFFF",LocalDate.of(2000,3,6),10.5,123,"Resumen",40);
 
         anime.addAutores(aoutor1);
@@ -19,19 +19,22 @@ public class Test {
 
         miTienda.addComic(anime);
         miTienda.addComic(novelaGrafica);
-        System.out.println(miTienda);
+
+
         Cliente cliente1 = new Cliente("zkdhz","jadzhz","jzkfeza","sdkhak");
         Cliente cliente2 = new Cliente("k;azhgda","ssjkadh","laejh","alejdfzehl");
-        Venta venta1 = new Venta(cliente1,anime,LocalDate.now());
-        Venta venta2 = new Venta(cliente2,anime,LocalDate.now());
-
+        LineaCompra lc1 = new LineaCompra(anime,12);
+        LineaCompra lc2 = new LineaCompra(novelaGrafica,3);
+        Venta venta = new Venta(cliente1);
+        venta.addLinea(lc1);
+        venta.addLinea(lc2);
 
         try {
-            miTienda.AddVenta(venta2);
-            miTienda.AddVenta(venta1);
+            miTienda.addVenta(venta);
         } catch (ExepcionStock e) {
             System.out.println(e.getMessage());
         }
-        System.out.println(miTienda);
+        miTienda.ListarComics();
+        miTienda.ListarVentas();
     }
 }

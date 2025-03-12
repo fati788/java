@@ -21,7 +21,7 @@ public class AsientoTurista extends Asiento {
     public String toString() {
         final StringBuffer sb = new StringBuffer("AsientoTurista{");
         sb.append("codigp=").append(this.getCodigo());
-      //  sb.append(", pasajero=").append(this.getPasajero().getDniPasaporte());
+        sb.append(", pasajero=").append(this.getPasajero()==null ? "X" :this.getPasajero().getDniPasaporte());
         sb.append(", precioBase=").append(this.CalcularPrecio());
         sb.append(", tipo=").append(tipo);
         sb.append(", ventana=").append(ventana);
