@@ -119,7 +119,8 @@ public class Agencia {
      public double ModtrarIngresos(){
          double total = 0;
          for (Alquiler a : this.alquilers) {
-             if (a.getFechaInicio().isBefore(LocalDate.now()) && a.getFechaFin().isBefore(LocalDate.now())) {
+             if (a.getFechaInicio().isBefore(LocalDate.now()) &&
+                     a.getFechaFin().isBefore(LocalDate.now())) {
                  total+= a.getPrecioTotal();
              }
          }
