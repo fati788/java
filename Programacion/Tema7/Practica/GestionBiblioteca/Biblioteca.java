@@ -141,7 +141,7 @@ public class Biblioteca {
 
     public ArrayList<Libro> buscarPrestamosUsuario(String dni){
         ArrayList<Libro> libros = new ArrayList<>();
-
+      return libros;
     }
 
 
