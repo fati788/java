@@ -116,17 +116,17 @@ public class Biblioteca {
                 HashSet<Prestamo> prestamos2 = prestamos.get(usuario);
                 for (Prestamo prestamo : prestamos2) {
                     if (prestamo.estaActivo() && prestamo.getLibro().getISBN().equals(isbn)) {
-                        return true;
+                        return false;
                     }
                 }
             }
-            return false;
+            return true;
     }
     public void prestarLibro(String dni , String isbn) {
-        if (this.esLibroDisponible(isbn)){
-            Usuario user = new Usuario(dni,"","","","","");
-            Libro lib = new Libro(isbn ,"","",0);
-            Prestamo p = new Prestamo(user,lib, LocalDate.now(),LocalDate.now());
+        if (this.esLibroDisponible(isbn) && usuarios.containsKey(dni) && catalogo.containsKey(isbn) ){
+            Usuario user = usuarios.get(dni);
+            Libro lib = catalogo.get(isbn);
+               Prestamo p = new Prestamo(user,lib, LocalDate.now(),null);
 
                 HashSet<Prestamo> prestamos2 = prestamos.get(user);
                 prestamos2.add(p);
@@ -135,7 +135,19 @@ public class Biblioteca {
         }
     }
     public Libro devolverLibro(String dni , String isbn) {
-     return null;
+        if (usuarios.containsKey(dni)) {
+            Usuario user = usuarios.get(dni);
+            HashSet<Prestamo> prestamosUsuario = prestamos.get(user);
+
+            if (prestamosUsuario != null) {
+                for (Prestamo p : prestamosUsuario) {
+                    if (p.estaActivo() && p.getLibro().getISBN().equals(isbn)) {
+                       return p.getLibro();
+                    }
+                }
+            }
+        }
+        return null;
 
     }
 
@@ -143,6 +155,16 @@ public class Biblioteca {
         ArrayList<Libro> libros = new ArrayList<>();
       return libros;
     }
+    public ArrayList<Libro> listarLibrosDisponibles() {
+        ArrayList<Libro> disponibles = new ArrayList<>();
+        for (Libro l : catalogo.values()) {
+            if (esLibroDisponible(l.getISBN())) {
+                disponibles.add(l);
+            }
+        }
+        return disponibles;
+    }
+
 
 
 }
