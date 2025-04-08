@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Biblioteca {
-   private HashMap<String,Libro>catalogo;
-   private HashMap<String,Usuario>usuarios;
-   private TreeMap<Usuario, HashSet<Prestamo>>prestamos;
-   private String nombre;
-   private String direccion;
-   private String telefono;
-   private String email;
+    private HashMap<String,Libro>catalogo;
+    private HashMap<String,Usuario>usuarios;
+    private TreeMap<Usuario, HashSet<Prestamo>>prestamos;
+    private String nombre;
+    private String direccion;
+    private String telefono;
+    private String email;
 
     public Biblioteca(String nombre, String direccion, String telefono, String email) {
         this.nombre = nombre;
@@ -111,38 +111,67 @@ public class Biblioteca {
     }
 
     public boolean esLibroDisponible(String isbn) {
-            Set<Usuario> usuarios =prestamos.keySet();
-            for (Usuario usuario : usuarios) {
-                HashSet<Prestamo> prestamos2 = prestamos.get(usuario);
-                for (Prestamo prestamo : prestamos2) {
-                    if (prestamo.estaActivo() && prestamo.getLibro().getISBN().equals(isbn)) {
-                        return true;
-                    }
+        Set<Usuario> usuarios =prestamos.keySet();
+        for (Usuario usuario : usuarios) {
+            HashSet<Prestamo> prestamos2 = prestamos.get(usuario);
+            for (Prestamo prestamo : prestamos2) {
+                if (prestamo.estaActivo() && prestamo.getLibro().getISBN().equals(isbn)) {
+                    return false;
                 }
             }
-            return false;
+        }
+        return true;
     }
     public void prestarLibro(String dni , String isbn) {
-        if (this.esLibroDisponible(isbn)){
-            Usuario user = new Usuario(dni,"","","","","");
-            Libro lib = new Libro(isbn ,"","",0);
-            Prestamo p = new Prestamo(user,lib, LocalDate.now(),LocalDate.now());
+        if (this.esLibroDisponible(isbn) && usuarios.containsKey(dni) && catalogo.containsKey(isbn) ){
+            Usuario user = usuarios.get(dni);
+            Libro lib = catalogo.get(isbn);
+            Prestamo p = new Prestamo(user,lib, LocalDate.now(),null);
 
-                HashSet<Prestamo> prestamos2 = prestamos.get(user);
-                prestamos2.add(p);
-                prestamos.put(user,prestamos2);
+            HashSet<Prestamo> prestamos2 = prestamos.get(user);
+            if (prestamos2 == null) {
+                prestamos2=new HashSet<>();
+            }
+            prestamos2.add(p);
+            prestamos.put(user, prestamos2);
 
         }
     }
     public Libro devolverLibro(String dni , String isbn) {
-     return null;
+        if (usuarios.containsKey(dni)) {
+            Usuario user = usuarios.get(dni);
+            HashSet<Prestamo> prestamosUsuario = prestamos.get(user);
+
+            if (prestamosUsuario != null) {
+                for (Prestamo p : prestamosUsuario) {
+                    if (p.estaActivo() && p.getLibro().getISBN().equals(isbn)) {
+                        return p.getLibro();
+                    }
+                }
+            }
+        }
+        return null;
 
     }
 
-    public ArrayList<Libro> buscarPrestamosUsuario(String dni){
-        ArrayList<Libro> libros = new ArrayList<>();
-      return libros;
+
+    public Set<Prestamo> buscarPrestamosUsuario(String dni) {
+        if (usuarios.containsKey(dni)) {
+            Usuario user = usuarios.get(dni);
+            return prestamos.get(user);
+        }
+        return null;
     }
+    public ArrayList<Libro> listarLibrosDisponibles() {
+        ArrayList<Libro> disponibles = new ArrayList<>();
+        for (Libro l : catalogo.values()) {
+            if (esLibroDisponible(l.getISBN())) {
+                disponibles.add(l);
+            }
+        }
+        return disponibles;
+    }
+
 
 
 }
