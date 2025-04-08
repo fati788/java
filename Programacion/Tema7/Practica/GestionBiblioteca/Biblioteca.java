@@ -129,8 +129,11 @@ public class Biblioteca {
                Prestamo p = new Prestamo(user,lib, LocalDate.now(),null);
 
                 HashSet<Prestamo> prestamos2 = prestamos.get(user);
-                prestamos2.add(p);
-                prestamos.put(user,prestamos2);
+                if (prestamos2 == null) {
+                   prestamos2=new HashSet<>();
+                }
+            prestamos2.add(p);
+            prestamos.put(user, prestamos2);
 
         }
     }
@@ -151,9 +154,13 @@ public class Biblioteca {
 
     }
 
-    public ArrayList<Libro> buscarPrestamosUsuario(String dni){
-        ArrayList<Libro> libros = new ArrayList<>();
-      return libros;
+
+    public Set<Prestamo> buscarPrestamosUsuario(String dni) {
+        if (usuarios.containsKey(dni)) {
+            Usuario user = usuarios.get(dni);
+            return prestamos.get(user);
+        }
+        return null;
     }
     public ArrayList<Libro> listarLibrosDisponibles() {
         ArrayList<Libro> disponibles = new ArrayList<>();
