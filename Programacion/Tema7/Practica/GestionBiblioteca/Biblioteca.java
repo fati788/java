@@ -122,7 +122,6 @@ public class Biblioteca {
             }
             return false;
     }
-
     public void prestarLibro(String dni , String isbn) {
         if (this.esLibroDisponible(isbn)){
             Usuario user = new Usuario(dni,"","","","","");
@@ -142,7 +141,6 @@ public class Biblioteca {
 
     public ArrayList<Libro> buscarPrestamosUsuario(String dni){
         ArrayList<Libro> libros = new ArrayList<>();
-
       return libros;
     }
 
