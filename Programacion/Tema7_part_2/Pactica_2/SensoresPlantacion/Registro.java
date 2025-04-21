@@ -1,4 +1,4 @@
-package Programacion.Tema7_part_2.Pactica_2;
+package Programacion.Tema7_part_2.Pactica_2.SensoresPlantacion;
 
 import java.time.LocalDateTime;
 
@@ -37,10 +37,6 @@ public class Registro {
     public void setHumedad(Double humedad) {
         this.humedad = humedad;
     }
-    public void incrementarHumedad(double  cant) {
-        this.humedad += cant;
-    }
-
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Registro{");

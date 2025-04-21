@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class TestPedidos {
     public static void main(String[] args) {
@@ -28,10 +29,10 @@ public class TestPedidos {
         Producto prod14 = new Producto(14L, "Periferico4", CategoriaProducto.PERIFERICOS, 45.95);
         Producto prod15 = new Producto(15L, "Periferico5", CategoriaProducto.PERIFERICOS, 59.95);
 
-        Pedido ped1 = new Pedido(1L, c1, EstadoProducto.RECIBIDO, LocalDate.now().plusDays(5),null);
-        Pedido ped2 = new Pedido(2L, c2, EstadoProducto.RECIBIDO, LocalDate.now().plusDays(20), null);
-        Pedido ped3 = new Pedido(3L, c3, EstadoProducto.RECIBIDO, LocalDate.now().plusDays(7), null);
-        Pedido ped4 = new Pedido(4L, c1, EstadoProducto.RECIBIDO, LocalDate.now().plusDays(2), null);
+        Pedido ped1 = new Pedido(1L, c1, EstadoProducto.RECIBIDO, LocalDate.now().minusDays(5),null);
+        Pedido ped2 = new Pedido(2L, c2, EstadoProducto.RECIBIDO, LocalDate.now().minusDays(20), null);
+        Pedido ped3 = new Pedido(3L, c3, EstadoProducto.RECIBIDO, LocalDate.now().minusDays(7), null);
+        Pedido ped4 = new Pedido(4L, c1, EstadoProducto.RECIBIDO, LocalDate.now().minusDays(2), null);
 
         ped1.setProductos(new HashSet<>( List.of(prod1, prod3, prod5, prod10)));
         ped2.setProductos(new HashSet<>( List.of(prod2, prod4, prod8, prod12)));
@@ -42,16 +43,39 @@ public class TestPedidos {
 
 
         //1. Muestra los libros cuyo precio sea mayor de 20€
-        pedidos.stream()
-                .filter(p -> p.getProductos().stream().filter(pr -> pr.getPrecio()>20).isParallel())
+        Stream.of(prod1 , prod2 , prod3 , prod5 , prod4)
+                .filter(pr -> pr.getPrecio()>20)
                 .forEach(System.out::println);
+        System.out.println("----------------------------");
+        //2. Muestra los pedidos que tengan algún producto de "Juegos"
+        pedidos.stream()
+                .filter( p -> p.getProductos().stream()
+                        .anyMatch(pr -> pr.getCategoria().equals(CategoriaProducto.JUEGOS)
+                ))
+                .forEach(System.out::println);
+        System.out.println("-------------------------------");
 
-        //2. Muestra los pedidos que tengan algún pedido de "Juegos"
        // 3. Genera una lista con todos los Productos, pero cambia su precio para que lleven un 10%
-                //de descuento
+        //de descuento
+
+       List<Producto> productosDescuento= Stream.of(prod1 , prod2 , prod3 , prod5 , prod4 , prod6
+                       ,prod7 , prod8 , prod9 , prod10 , prod11 , prod12 , prod13 , prod14 , prod15)
+                .peek(pr -> pr.setPrecio(pr.getPrecio()*0.9))
+                .toList();
+       productosDescuento
+               .forEach(System.out::println);
+
+        System.out.println("-------------------------------");
         /*4. Saca los productos que aparecen en los pedidos de clientes de nivel 2, realizados entre
         el 01-04-2025 y el 01-05-2025. Hay que usar flatmap para unir todos los productos de
         todos los pedidos: .flatMap(p -> p.getProductos().stream())*/
+        pedidos.stream()
+                .filter(p -> p.getCliente().getNivel() == 2)
+                .filter(p -> p.getFechaPedido().isAfter(LocalDate.of(2025,4,1))
+                                                                   && p.getFechaPedido().isBefore(LocalDate.of(2025,5,1)))
+                .flatMap(p -> p.getProductos().stream())
+                .forEach(System.out::println);
+        System.out.println("---------------------------------------");
        // 5. Muestra el producto más caro de la categoría Juegos
        // 6. Devuelve los dos pedidos más recientes
        /* 7. Muestra los pedidos hechos hoy, debe aparecer el pedido y debajo la lista de productos

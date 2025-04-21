@@ -1,11 +1,8 @@
-package Programacion.Tema7_part_2.Pactica_2;
+package Programacion.Tema7_part_2.Pactica_2.SensoresPlantacion;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class TestRegistro {
 
@@ -51,10 +48,10 @@ public class TestRegistro {
         System.out.println("4--------------------------------------------------");
         /*4. Incrementar en 5 unidades la humedad de todos los registros y mostrar las temperaturas,
                 humedades y fechas/horas actualizadas.*/
-        registros.stream()
-                .forEach(r -> r.incrementarHumedad(5));
-        registros.forEach(System.out::println);
 
+         registros.stream()
+                 .peek(r -> r.setHumedad(r.getTemperatura()+5))
+                         .forEach(System.out::println);
 
         /*5. Encontrar el registro con la temperatura más baja que tenga una humedad mayor a 80 y mostrar la
         temperatura, humedad y fecha.*/
