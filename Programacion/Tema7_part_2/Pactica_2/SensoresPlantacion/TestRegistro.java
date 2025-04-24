@@ -30,7 +30,7 @@ public class TestRegistro {
         registros.stream()
                 .filter(s -> (s.getTemperatura() > 25 && s.getHumedad()<70 && s.getFachaHora().isBefore(LocalDateTime.now())))
                 .forEach(System.out::println);
-        System.out.println("---------------------------------------------------");
+        System.out.println("-------------------------------------------");
 
         //2. Encontrar el registro con la temperatura más alta y mostrar el registro completo.
         System.out.println("Registro de temp mas alta: ");
@@ -45,7 +45,7 @@ public class TestRegistro {
                 .map(Registro::getFachaHora)
                 .toList()
                 .forEach(System.out::println);
-        System.out.println("4--------------------------------------------------");
+        System.out.println("-----------Incrementa 5 unidades de humedad---------");
         /*4. Incrementar en 5 unidades la humedad de todos los registros y mostrar las temperaturas,
                 humedades y fechas/horas actualizadas.*/
 
@@ -59,11 +59,14 @@ public class TestRegistro {
         Registro registroMinTemp = registros.stream()
                 .filter(s -> s.getHumedad()>80)
                 .min(Comparator.comparing(Registro::getTemperatura))
-                .orElseThrow();
-        System.out.println("temp : " + registroMinTemp.getTemperatura()
-                            +" khumedad : " + registroMinTemp.getHumedad()
-                               +" fecha : " + registroMinTemp.getFachaHora());
-
+                .orElse(null);
+        if (registroMinTemp != null) {
+            System.out.println("temp : " + registroMinTemp.getTemperatura()
+                    + " khumedad : " + registroMinTemp.getHumedad()
+                    + " fecha : " + registroMinTemp.getFachaHora());
+        }else {
+            System.out.println("No hay ningun registro que cumple las condiciones");
+        }
         /*6. Verificar si algún registro tiene una temperatura mayor a 30 grados, humedad mayor a 90 y la fecha
         es de hoy. Mostrar un mensaje indicando si hay algún registro que cumple esta condición o no.*/
         System.out.println("Hay registro que cumple la condicion ?");
@@ -73,7 +76,7 @@ public class TestRegistro {
                 .orElse(null);
 
         if (registroFinded != null){
-            System.out.println("Si , hay un registro que comple la condicion");
+            System.out.println("Si , hay un registro que comple la condicion eso: " + registroFinded);
         }else{
             System.out.println("No , no hay");
         }

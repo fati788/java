@@ -37,17 +37,23 @@ public class Banco {
         sb.append('}');
         return sb.toString();
     }
-                // 1. getTransaccionesImporteMinimo(double valor): mostrar todas las transacciones con importe
-                //superior a un valor dado (por ejemplo, 500€), ordenadas cronológicamente. Filter y sorted
+
+    /**
+     * mostrar todas las transacciones con importe
+     * superior a un valor dado
+      * @param valor
+     */
     public void  getTranccionesImporteMinimo(double valor){
         this.cuentas.stream()
                 .flatMap(c -> c.getTransacciones().stream())
                 .filter(t -> t.getImporte() > valor)
-                .sorted()
+                .sorted(Comparator.comparing(Transaccion::getFecha))
                 .forEach(System.out::println);
     }
 
-    //2. getIngresosTotales(): el total de ingresos del banco. Filter, reduce y summarizingDouble
+    /**
+     * Mostrar el total de ingresos del banco
+     */
     public void  getIngresosTotales(){
        DoubleSummaryStatistics dss =  cuentas.stream()
                 .flatMap(c -> c.getTransacciones().stream())
@@ -56,7 +62,10 @@ public class Banco {
         System.out.println("El total de los ingresos es: "+dss.getSum());
 
     }
-    //3. getGastosTotales(): ídem para gastos
+
+    /**
+     * Mostrar el total de gastos del banco
+     */
 
     public void  getGastosTotales(){
         DoubleSummaryStatistics dss2 =  cuentas.stream()
@@ -66,15 +75,22 @@ public class Banco {
         System.out.println("El total de los gastos es: "+dss2.getSum());
 
     }
-    //4. getCuentasPorSaldo(): mostrar las cuentas ordenadas por saldo de mayor a menor (sorted)
+
+    /**
+     * mostrar las cuentas ordenadas por saldo de mayor a menor
+     */
+
     public void getCuentasPorSaldo(){
         cuentas.stream()
                 .sorted(Comparator.comparing(Cuenta::getSaldo).reversed())
                 .forEach(System.out::println);
     }
-   //5. getNumTransaccionesPorCuenta(): generar un mapa donde las claves sean los ids de cuentas, y los
-    //valores sean el número de transacciones de cada cuenta. Collectors.groupingBy,
-    //Collectors.counting
+
+    /**
+     * generar un mapa donde las claves sean los ids de cuentas
+     * y los valores sean el número de transacciones de cada cuenta
+     */
+
     public void  getNumTransaccionesPorCuenta(){
 
         Map<UUID, Long> NumTransaccionesPorCuenta = cuentas.stream()
@@ -83,23 +99,24 @@ public class Banco {
 
         NumTransaccionesPorCuenta.forEach((k , v ) -> System.out.println(k+" --> "+v));
     }
-    //6. getCuentasActivas(): mostrar las cuentas que tengan al menos una transacción este mes
-    public void getCuentasActivas(){
-        Transaccion transaccion = cuentas.stream()
-                .flatMap(c -> c.getTransacciones().stream())
-                .filter(t -> t.getFecha().getMonth().equals(LocalDate.now().getMonth()))
-                .findAny()
-                .orElse(null);
-        System.out.println("Cuentas activas: ");
-        for (Cuenta c : cuentas) {
-            if (c.getTransacciones().contains(transaccion)) {
-                System.out.println(c);
-            }
-        }
+
+    /**
+     * mostrar las cuentas que tengan al menos una transacción este mes
+     */
+
+    public void getCuentasActivas() {
+        cuentas.stream()
+               .filter(c -> c.getTransacciones().stream()
+                    .anyMatch(t -> t.getFecha().getMonth().equals(LocalDate.now().getMonth()) &&
+                                   t.getFecha().getYear() == LocalDate.now().getYear()))
+                .forEach(System.out::println);
     }
 
-    //7. getTransaccionesPorDescripcion(String palabra): devuelve un mapa donde la clave sea el id de
-    //cuenta, y el valor un set de las transacciones de esa cuenta que contengan la palabra
+    /**
+     *  devuelve un mapa donde la clave sea el id de
+     *  cuenta, y el valor un set de las transacciones de esa cuenta que contengan la palabra
+     * @param palabra
+     */
     public void  getTransaccionesPorDescripcion(String palabra){
 
         Map<UUID ,Set<Transaccion> > TransaccionesPorDescripcion =  cuentas.stream()
@@ -111,8 +128,10 @@ public class Banco {
 
     }
 
-  //8. showAnalisisTemporal(): debe mostrar agrupadas por mes la suma total de ingresos y gastos:
-    //marzo 2025 – ingresos: 5000€, gastos: 3000€
+    /**
+     * mostrar transacciones agrupadas por mes la suma total de ingresos y gastos
+     */
+
    public void showAnalisisTemporal(){
         Map<Month , List<Transaccion>> transPorMes=  cuentas.stream()
                 .flatMap(c -> c.getTransacciones().stream())
