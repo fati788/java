@@ -14,7 +14,7 @@ public class VentasUsuario {
     private ArrayList<Compra> ventas;
     private   ArrayList<Compra>compras;
 
-    public VentasUsuario() {
+    public VentasUsuario(Usuario usuario) {
         this.productosDisponibles = new HashSet<>();
         this.ventas = new ArrayList<>();
         this.compras = new ArrayList<>();

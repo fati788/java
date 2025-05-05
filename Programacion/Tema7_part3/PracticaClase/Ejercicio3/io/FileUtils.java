@@ -80,7 +80,7 @@ public class FileUtils {
         }
     }
     public GestionComprasVentas cargarCSV(){
-        VentasUsuario vu = new VentasUsuario();
+        VentasUsuario vu = new VentasUsuario(null);
         vu.getCompras().addAll(cargarCompras());
         vu.getVentas().addAll(cargarCompras());
         vu.getProductosDisponibles().addAll(cargarProductos());
