@@ -1,0 +1,233 @@
+
+
+Ejercicio 1
+Para este ejercicio crea una clase llamada FileUtils. Luego utilizando los métodos de streams NIO.2
+(Files.find, Files.walk) implementa los siguientes métodos:
+1. Realiza un método que calcule cuánto espacio ocupa un directorio recursivamente. Puedes hacerlo
+recorriendo recursivamente todos los archivos de un directorio, y vas sumando a una variable el
+tamaño de cada fichero.
+2. Realiza un método que reciba como parámetro un nombre de fichero y una ruta. El método buscará
+ese nombre de fichero en todas las subcarpetas de la ruta pasada como parámetro. El método
+mostrará por pantalla todas las rutas que contengan ese nombre de fichero (contains).
+3. Usando el método anterior crea otro que reciba un nombre de fichero y una ruta, en caso de que
+encuentre en esa ruta (dentro) un nombre de fichero como ese lo eliminará. Si hay más de uno los
+eliminará todos. (Puedes utilizar ‘Files.deleteIfExists’).
+4. Crea un método que devuelva una List<Path> con todos los ficheros regulares que hay dentro de
+una carpeta, que es una ruta que se pasa como parámetro al método.
+Ejercicio 2
+
+
+
+En este ejercicio vamos a crear un listado de contactos de videojuegos. Nos creamos un enum Nivel
+{ DIOS, MÁQUINA, BUENO, NORMAL, REGULAR, MALILLO, PAQUETE }. Crearemos una clase Gamer, que
+contenga atributos: String nick, String email, String juego, Nivel nivel. Decide tú los métodos necesarios en
+esta clase también.
+Ahora vamos a crear una clase Discord que tenga como atributo una colección de Gamer (decide tú
+exactamente la estructura a usar). Tendrá una serie de métodos (aparte de getters, setters, etc.):
+
+
+
+- loadGamers(): leerá un fichero de texto “gamers.txt” con la información de los jugadores y lo
+asignará a la colección construyendo cada objeto Gamer con la información de cada línea del
+fichero. Más adelante se muestra el formato de este fichero. Se debe llamar a este método en el
+constructor de Discord.
+
+
+- addGamer(Gamer j): añadirá un jugador a la colección de Gamers. No debe haber repetidos.
+- removeGamer(Gamer j): eliminará un jugador de la colección de Gamers.
+
+
+- findGamer(String nick): buscará un jugador en la colección de Gamers.
+- listGamers(): muestra todos los jugadores con su información.
+- saveGamers(): deberá tomar la colección de Gamers y sobreescribir el fichero “gamers.txt” con los
+que haya en la colección. Prueba a crear un destructor y llamar a este método en un destructor.
+Crea una clase TestGamer, que lleve un menú para gestionar los jugadores. Las opciones del menú
+serán: 1. Añadir jugador, 2. Eliminar jugador, 3. Buscar jugador, 4. Listar, 5. Salir (que grabe también los
+jugadores al archivo).
+
+
+El fichero “gamers.txt” debería tener esta estructura:
+Nick;email;juego;nivel
+Bnei;jjavier@gmail.com;AoEII;Malillo
+Lucas88;lucas@outlook.com;Fifa21;Máquina
+
+
+
+Para leer con separadores puedes usar este código o usar StringTokenizer:
+//Suponemos que en ‘linea’ tenemos una línea del archivo
+List<String> tokens = Arrays.asList(linea.split(";"));
+tokens.get(0); //Sería el nick
+Para el acceso a ficheros puedes usar la clase que más te interese, pero lo recomendable es usar Files y
+Streams. El fichero .csv supondremos que se encuentra en nuestro paquete, puedes usar la ruta que te
+interese para cargarlo.
+Para los tests carga el fichero, añade un par de empleados nuevos, llama a alguno de los métodos que
+hayas podido implementar de mostrar<algo> y finalmente graba el fichero de nuevo. Comprueba que se
+han grabado los cambios.
+Ejercicios clase Ficheros Java NIO 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ejercicio 3 (tipo examen)
+Vamos a modelar un sistema de venta de productos de segunda mano (tipo Wallapop).
+Crearemos un paquete “model” y meteremos las tres clases siguientes. (2 puntos)
+Tendremos una clase Usuario que llevará nombre, apellidos, género, fecha nacimiento, dni, login y
+password.
+Tendremos una clase Producto2Mano que llevará id, nombre, descripción, categoría (INMUEBLES,
+TELEFONÍA, INFORMÁTICA, COCHES, BICICLETAS, MUEBLES, ANTIGUEDADES, ROPA, …), estado (PERFECTO,
+BUENO, POCO USO, MUY USADO, DEFECTUOSO, MALO), envío (SI o NO), precio (al que se quiere vender el
+producto), usuario (el usuario que lo vende).
+Tendremos otra clase Compra, que llevará un Usuario (que lo compra), otro Usuario (que lo vende),
+un Producto de segunda mano, una fecha, y un precio de compra (puede ser inferior al precio de venta del
+producto, pero no superior).
+En un paquete “service” meteremos una clase llamada VentasUsuario, que llevará como
+propiedades: (4 puntos)
+- Usuario usuario
+- Set<Producto2Mano> productosDisponibles. Serían los productos que tiene a la venta ese
+usuario.
+- ArrayList<Compra> ventas. Serían las compras que se le han hecho a este usuario, lo que ha
+vendido, no lo que ha comprado.
+- ArrayList<Compra> compras. Serían las compras que ha hecho este usuario a otros.
+- Necesitaremos métodos para añadir un producto a los disponibles de ese usuario, eliminar de
+la lista disponibles, getters y setters, toString. Tendremos un método para añadir una venta y
+para añadir una compra. También para mostrar las ventas y mostrar las compras (getVentas y
+getCompras). Estos dos ArrayList se llenarán desde el método realizarCompra de la siguiente
+clase.
+En ese mismo paquete crearemos GestionComprasVentas que lleve un Set<VentasUsuario>, con
+todos los usuarios que hay en el sistema y los productos que tienen a la venta. También llevará un
+List<Compra>. Tienes que hacer método para añadir y eliminar un objeto VentasUsuario de su Set
+correspondiente. Esta clase llevará un método fundamental llamado realizarCompra(Usuario comprador,
+Producto2Mano), que creará un objeto compra, lo añadirá a la lista de compras de esta clase, y lo añadirá a
+la lista de ventas del usuario que lo vende y a la lista de compras del usuario que lo compra. Luego incluirá
+una serie de métodos con streams para:
+Ejercicios clase Ficheros Java NIO 2
+1º DAW – Programación 4
+- Calcular el importe total de compras
+- Sacar las compras agrupadas por usuario (Map) ordenadas por fecha. (Map<Usuario,
+List<Compra>>).
+- Sacar todas las compras agrupadas por categoría (Map<Categoria, List<Compra>>).
+- Sacar el número total de compras agrupadas por estado (Map<Estado, Long>).
+- Sacar el número total de compras por categorías para usuarios de menos de 30 años.
+- Sacar el número total de compras agrupadas por día de la semana (lunes-100, martes-55, …)
+Deberás crear un paquete “io” con una clase FileUtils: (2 puntos)
+- cargarCSV (): método que cargará tres ficheros csv que tienes que crear tú. Uno para usuarios
+(20 usuarios), otro para productos de segunda mano (50 productos), y otro para compras (20
+compras de productos). Los datos los puedes generar con Mockaroo. Con esa información
+debes devolver un objeto GestionComprasVentas que tenga relleno el Set de VentasUsuario y
+el List de Compras.
+Deberás crear una aplicación AppGestion (2 puntos) que en primer lugar llamará a cargarCSV de la clase
+FileUtils y con eso creará un objeto GestionComprasVentas con toda la información cargada de los ficheros.
+Después se realizarán operaciones sobre ese objeto, para ello se mostrará un menú que tenga las
+siguientes opciones:
+- 1. Realizar Compra: pide dni de usuario que compra, id de producto que se compra, precio por
+el que se compra. Con eso creará un objeto Compra para la fecha del día y lo meterá en la lista
+de compras de GestionComprasVentas, además lo meterá en ventas del usuario que vende ese
+producto, y dentro de compras del usuario que compra ese producto.
+- 2. Mostrar las Compras agrupadas por usuario.
+- 3. Mostrar el total de compras agrupadas por categorías.
+- 4. Salir. Antes de salir mostrará el importe total de todas las compras.
+Entregarás un proyecto Maven llamado SegundaMano, que incluya su Javadoc (con comentarios), fichero
+jar que funcione en Java 17, y el código organizado en los paquetes que hemos dicho. Puedes crearte algún
+paquete más si lo necesitas para crear alguna clase de apoyo.
+
+
+
+
+
+
+
+package tema7_parte3.ejercicioGamers;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+
+public class Discord {
+
+    private HashSet<Gamer> jugadores;
+
+    public Discord() {
+        //Cargar jugadores desde el fichero gamers.txt
+        jugadores = new HashSet<>(loadGamers());
+    }
+
+    public void addGamer(Gamer gamer) {
+        jugadores.add(gamer);
+    }
+
+    public void removeGamer(Gamer gamer) {
+        jugadores.remove(gamer);
+    }
+
+    public HashSet<Gamer> getJugadores() {
+        return jugadores;
+    }
+
+    public void listGamers() {
+        jugadores.forEach(System.out::println);
+    }
+
+    public Gamer findGamer(String nick) {
+        return jugadores.stream()
+                .filter(g -> g.getNick().equals(nick))
+                .findFirst()
+                .orElse(null);
+    }
+
+    //MÉTODOS DE PERSISTENCIA
+    private List<Gamer> loadGamers() {
+        try {
+            List<Gamer> gamers = Files.lines(Paths.get("src/tema7_parte3/ejercicioGamers/gamers.csv"))
+                    .map(linea -> {
+                        List<String> tokens = Arrays.asList(linea.split(","));
+                        //tokens[0] -> Bnei
+                        //tokens[1] -> jjavier@gmail.com
+                        //tokens[2] -> AoEIV
+                        //tokens[3] -> MALILLO
+                        return new Gamer(tokens.get(0), tokens.get(1), tokens.get(2),
+                                Nivel.valueOf(tokens.get(3)));
+                        }) //Stream<Gamer>
+                    .toList();
+
+            return gamers;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void saveGamers() {
+        try {
+
+            Files.write(Paths.get("src/tema7_parte3/ejercicioGamers/gamers.csv"),
+                    jugadores.stream()
+                            .map(g -> g.toString())
+                            .toList());
+        } catch (IOException e) {}
+    }
+
+}
