@@ -41,6 +41,7 @@ public class FileUtils {
         return materials;
 
     }
+
     public static Localizacion buscar(Long id , List<Localizacion> locals) {
         return locals.stream()
                 .filter(localizacion -> localizacion.getId().equals(id))
