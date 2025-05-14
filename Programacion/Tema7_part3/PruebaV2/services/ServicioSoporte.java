@@ -19,6 +19,30 @@ public class ServicioSoporte {
 
     }
 
+    public List<TicketSoporte> getTicketSoportes() {
+        return ticketSoportes;
+    }
+
+    public void setTicketSoportes(List<TicketSoporte> ticketSoportes) {
+        this.ticketSoportes = ticketSoportes;
+    }
+
+    public Set<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Set<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public Set<Tecnico> getTecnicos() {
+        return tecnicos;
+    }
+
+    public void setTecnicos(Set<Tecnico> tecnicos) {
+        this.tecnicos = tecnicos;
+    }
+
     public void addUsuario(Usuario u){
         this.usuarios.add(u);
     }
