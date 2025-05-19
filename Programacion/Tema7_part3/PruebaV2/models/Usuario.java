@@ -31,4 +31,5 @@ public class Usuario extends Persona {
         sb.append('}');
         return sb.toString();
     }
+
 }

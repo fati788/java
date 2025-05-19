@@ -6,6 +6,7 @@ import Programacion.Tema7_part3.PruebaV2.services.ServicioSoporte;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -50,92 +51,75 @@ public class DAOTicketsSoporte {
         return ss;
 
     }
- /*package io;
+    public static void grabarCSV(ServicioSoporte ss) throws IOException {
 
-import models.*;
-import services.ServicioSoporte;
+        //Grabar usuarios en USUARIO.CSV
 
-import java.io.IOException;
-import java.nio.file.*;
-import java.util.*;
+        List<String> linesUser = new ArrayList<>();
 
-public class DAOTicketsSoporte {
+        ss.getUsuarios().forEach(usuario -> {
+            StringBuffer line = new StringBuffer();
 
-    public static void grabarCSV(ServicioSoporte servicio) {
-        try {
-            // === USUARIOS ===
-            List<String> linesUsuarios = new ArrayList<>();
-            linesUsuarios.add("id,nombre,apellidos,email,movil,fechaAlta");
+            line.append(usuario.getId()).append(",");
+            line.append(usuario.getNombre()).append(",");
+            line.append(usuario.getApellido()).append(",");
+            line.append(usuario.getEmail()).append(",");
+            line.append(usuario.getTelefono()).append(",");
+            line.append(usuario.getFechaAla());
+            linesUser.add(line.toString());
 
-            servicio.getUsuarios().forEach(u -> {
-                StringBuffer line = new StringBuffer();
-                line.append(u.getId()).append(",");
-                line.append(u.getNombre()).append(",");
-                line.append(u.getApellidos()).append(",");
-                line.append(u.getEmail()).append(",");
-                line.append(u.getMovil()).append(",");
-                line.append(u.getFechaAlta());
-                linesUsuarios.add(line.toString());
-            });
+        });
 
-            Files.write(Paths.get("usuarios.csv"), linesUsuarios,
-                    StandardOpenOption.CREATE,
-                    StandardOpenOption.WRITE,
-                    StandardOpenOption.TRUNCATE_EXISTING);
+        Files.write(Paths.get("resources/ussuarios.csv"),linesUser ,
+                StandardOpenOption.CREATE , StandardOpenOption.WRITE ,
+                StandardOpenOption.TRUNCATE_EXISTING);
 
-            // === TECNICOS ===
-            List<String> linesTecnicos = new ArrayList<>();
-            linesTecnicos.add("id,nombre,apellidos,email,movil,especialidad,valoracion");
+        //Grabar tecnicos.csv
+        List<String> linesTechnico = new ArrayList<>();
 
-            servicio.getTecnicos().forEach(t -> {
-                StringBuffer line = new StringBuffer();
-                line.append(t.getId()).append(",");
-                line.append(t.getNombre()).append(",");
-                line.append(t.getApellidos()).append(",");
-                line.append(t.getEmail()).append(",");
-                line.append(t.getMovil()).append(",");
-                line.append(t.getEspecialidad().name()).append(",");
-                line.append(t.getValoracion());
-                linesTecnicos.add(line.toString());
-            });
+        ss.getTecnicos().forEach(tecnico -> {
+            StringBuffer line = new StringBuffer();
 
-            Files.write(Paths.get("tecnicos.csv"), linesTecnicos,
-                    StandardOpenOption.CREATE,
-                    StandardOpenOption.WRITE,
-                    StandardOpenOption.TRUNCATE_EXISTING);
+            line.append(tecnico.getId()).append(",");
+            line.append(tecnico.getNombre()).append(",");
+            line.append(tecnico.getApellido()).append(",");
+            line.append(tecnico.getEmail()).append(",");
+            line.append(tecnico.getTelefono()).append(",");
+            line.append(tecnico.getEspeciadad()).append(",");
+            line.append(tecnico.getValoracion());
 
-            // === TICKETS ===
-            List<String> linesTickets = new ArrayList<>();
-            linesTickets.add("id,fechaCreacion,fechaFinalizacion,estado,prioridad,idUsuario,idTecnico,comentarios");
+            linesTechnico.add(line.toString());
 
-            servicio.getTickets().forEach(t -> {
-                StringBuffer line = new StringBuffer();
-                line.append(t.getId()).append(",");
-                line.append(t.getFechaCreacion()).append(",");
-                line.append((t.getFechaFinalizacion() != null ? t.getFechaFinalizacion() : "")).append(",");
-                line.append(t.getEstado().name()).append(",");
-                line.append(t.getPrioridad()).append(",");
-                line.append(t.getUsuario().getId()).append(",");
-                line.append(t.getTecnico().getId()).append(",");
-                line.append("\"").append(t.getComentarios().replace("\"", "")).append("\"");
+        });
+        Files.write(Paths.get("resources/tecnicos.csv") , linesTechnico ,
+                StandardOpenOption.CREATE , StandardOpenOption.WRITE , StandardOpenOption.TRUNCATE_EXISTING);
 
-                linesTickets.add(line.toString());
-            });
 
-            Files.write(Paths.get("tickets.csv"), linesTickets,
-                    StandardOpenOption.CREATE,
-                    StandardOpenOption.WRITE,
-                    StandardOpenOption.TRUNCATE_EXISTING);
 
-            System.out.println("✅ Archivos guardados correctamente al estilo solicitado.");
+        //GRABAR TICKETSOPORTE.CSV
 
-        } catch (IOException e) {
-            System.out.println("❌ Error al guardar archivos CSV: " + e.getMessage());
-        }
+        List<String> linesTicketSoporte = new ArrayList<>();
+
+        ss.getTicketSoportes().forEach(ticket -> {
+
+            StringBuffer linetic = new StringBuffer();
+            linetic.append(ticket.getId()).append(",");
+            linetic.append(ticket.getFechaCreacion()).append(",");
+            linetic.append(ticket.getFechaFinalizacion()).append(",");
+            linetic.append(ticket.getEstado()).append(",");
+            linetic.append(ticket.getPrioridad()).append(",");
+            linetic.append(ticket.getSolicitante().getId()).append(",");
+            linetic.append(ticket.getAsignado().getId()).append(",");
+            linetic.append(ticket.getComentarios());
+
+            linesTicketSoporte.add(linetic.toString());
+
+        });
+        Files.write(Paths.get("resources/TicketSoporte.csv") , linesTicketSoporte,
+                StandardOpenOption.CREATE , StandardOpenOption.WRITE , StandardOpenOption.TRUNCATE_EXISTING);
+
+
+
+
     }
-}
-*/
-
-
-
 }

@@ -1,5 +1,7 @@
 package Programacion.Tema7_part3.PruebaV2.models;
 
+import java.util.Objects;
+
 public class Persona {
     protected Integer id;
     protected String nombre;
@@ -67,4 +69,15 @@ public class Persona {
         return sb.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Persona persona = (Persona) o;
+        return Objects.equals(id, persona.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
