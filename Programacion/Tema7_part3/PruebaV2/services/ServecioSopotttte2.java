@@ -33,6 +33,19 @@ public class ServecioSopotttte2 {
     public Set<Tecnico> getTecnicos() {
         return tecnicos;
     }
+
+    public void setTicketSoportes(List<TicketSoporte> ticketSoportes) {
+        this.ticketSoportes = ticketSoportes;
+    }
+
+    public void setUsuarios(Set<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public void setTecnicos(Set<Tecnico> tecnicos) {
+        this.tecnicos = tecnicos;
+    }
+
     public void addUsuario(Usuario u ){
         this.usuarios.add(u);
     }
@@ -75,6 +88,7 @@ public class ServecioSopotttte2 {
 
 
     }
+
 
 
 }

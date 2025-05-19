@@ -92,9 +92,16 @@ public class ServicioSoporte {
                 .collect(Collectors.toList());
     }
     public Map<Especiadad , List<Tecnico>> getTecnicosGroupByEspecialidad(){
-        return this.tecnicos.stream()
-                .sorted(Comparator.comparing(Tecnico::getValoracion))
+        //Agrupa por especialidad
+        Map<Especiadad , List<Tecnico>> tecs = this.tecnicos.stream()
                 .collect(Collectors.groupingBy(Tecnico::getEspeciadad));
+        //Ordedenar la lista
+        tecs.forEach((k,v)->{
+
+            v.sort(Comparator.comparing(Tecnico::getValoracion));
+
+        });
+        return tecs;
 
     }
     public TicketSoporte findTicketSoporteById(int id){
@@ -104,22 +111,24 @@ public class ServicioSoporte {
                 .orElse(null);
     }
 
+
     public List<TicketSoporte> getTicketsAbiertos(){
         return this.ticketSoportes
-                .stream().filter(t -> t.getFechaCreacion().isAfter(LocalDate.now()))
-                .filter( t -> t.getFechaFinalizacion().isBefore(LocalDate.now()))
-                .sorted()
-                .collect(Collectors.toList())
-                .reversed();
+                .stream()
+                .filter( t -> t.getEstado() == Estado.ABIERTO)
+                .sorted(Comparator.comparing(TicketSoporte::getEstado).reversed())
+                .toList();
 
     }
+
 
     public List<TicketSoporte> getTicketsCerrados(){
         return this.ticketSoportes.stream()
-                .filter( t -> t.getFechaFinalizacion().isAfter(LocalDate.now()))
-                .sorted(Comparator.comparing(TicketSoporte::getFechaFinalizacion))
+                .filter(t -> t.getEstado().equals(Estado.RESUELTO))
+                .sorted(Comparator.comparing(TicketSoporte::getFechaFinalizacion).reversed())
                 .toList();
     }
+
 
     public List<TicketSoporte> getTicketsEnProcesoTechnicoInformatico(){
         return this.ticketSoportes.stream()
@@ -128,7 +137,7 @@ public class ServicioSoporte {
                 .toList();
     }
 
-    public long getTotalTicketsResueltos(int perioridad){
+    public Long getTotalTicketsResueltos(int perioridad){
         return this.ticketSoportes.stream()
                 .filter(t -> t.getPrioridad() == perioridad)
                 .filter( t -> t.getEstado().equals(Estado.RESUELTO))
@@ -139,7 +148,7 @@ public class ServicioSoporte {
         return this.ticketSoportes.stream()
                 .filter( t -> t.getEstado().equals(estado))
                 .filter(t -> t.getPrioridad().equals(prioridad))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(TreeSet::new));
 
     }
 
@@ -151,21 +160,22 @@ public class ServicioSoporte {
 
     public Set<Tecnico> findTecnicosRapidos(){
         return this.ticketSoportes.stream()
-                .filter( t -> ChronoUnit.DAYS.between(t.getFechaCreacion() , t.getFechaFinalizacion()) <5)
+                .filter( t -> ChronoUnit.DAYS.between(t.getFechaFinalizacion() , t.getFechaCreacion()) <=5)
                 .map(TicketSoporte::getAsignado)
                 .collect(Collectors.toSet());
     }
 
-    public long getTotlaTicketsRetardados(){
+    public Long getTotlaTicketsRetardados(){
         return this.ticketSoportes.stream()
-                .filter( t -> t.getFechaFinalizacion().isBefore(LocalDate.now()))
-                .filter( t -> ChronoUnit.DAYS.between(t.getFechaCreacion() , t.getFechaFinalizacion()) >7)
+                .filter( t -> t.getEstado().equals(Estado.RESUELTO))
+                .filter( t -> ChronoUnit.DAYS.between(t.getFechaFinalizacion() , t.getFechaCreacion()) >7)
                 .count();
     }
     public Double getMediaResolucionTickets(int perioridad){
       return this.ticketSoportes.stream()
-                .filter( t -> t.getPrioridad() == perioridad)
-                .mapToLong( t -> ChronoUnit.DAYS.between(t.getFechaCreacion() , t.getFechaFinalizacion()))
+                .filter( t -> t.getPrioridad().equals(perioridad))
+              .filter(t -> t.getEstado().equals(Estado.RESUELTO))
+                .mapToLong( t -> ChronoUnit.DAYS.between(t.getFechaFinalizacion() , t.getFechaCreacion()))
                 .average()
                 .orElse(0.0);
     }
@@ -174,21 +184,22 @@ public class ServicioSoporte {
         return this.ticketSoportes.stream()
                 .filter( t -> t.getEstado().equals(Estado.RESUELTO))
                 .collect(Collectors.groupingBy(TicketSoporte::getAsignado ,
-                        Collectors.averagingDouble( t -> ChronoUnit.DAYS.between(t.getFechaCreacion() , t.getFechaFinalizacion()))));
+                        Collectors.averagingLong( t -> ChronoUnit.DAYS.between(t.getFechaFinalizacion() , t.getFechaCreacion()))));
 
     }
     public Boolean areAllTicketsFinishedLessThanDays(){
         return this.ticketSoportes.stream()
                 .filter( t -> t.getEstado().equals(Estado.RESUELTO))
-                .allMatch(  t -> ChronoUnit.DAYS.between(t.getFechaCreacion(), t.getFechaFinalizacion()) <10);
+                .allMatch(  t -> ChronoUnit.DAYS.between(t.getFechaFinalizacion(), t.getFechaCreacion()) <10);
 
 
     }
 
     public Optional<TicketSoporte> getFirstTicketSolveOneDay(){
         return this.ticketSoportes.stream()
-                .filter(t -> t.getFechaCreacion().getDayOfWeek().equals(t.getFechaFinalizacion().getDayOfWeek()))
-                .findAny();
+                .filter(t -> t.getEstado().equals(Estado.RESUELTO))
+                .filter(t ->ChronoUnit.DAYS.between(t.getFechaFinalizacion(), t.getFechaCreacion()) ==1)
+                .findFirst();
     }
 
 
