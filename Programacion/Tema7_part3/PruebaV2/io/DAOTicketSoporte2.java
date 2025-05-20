@@ -43,10 +43,16 @@ public class DAOTicketSoporte2 {
                 .forEach(line -> {
                     List<String> tokens = Arrays.asList(line.split(","));
 
+                    Estado estado = Estado.valueOf(tokens.get(3));
+                    LocalDate fecha = null;
+                    if (estado.equals(Estado.RESUELTO)){
+                        fecha = LocalDate.parse(tokens.get(2));
+                    }
                     TicketSoporte ts = new TicketSoporte(Integer.valueOf(tokens.get(0)) , LocalDate.parse(tokens.get(1)),
-                            LocalDate.parse(tokens.get(2)) , Estado.valueOf(tokens.get(3)) ,Integer.parseInt(tokens.get(4)),
+                          fecha , estado ,Integer.parseInt(tokens.get(4)),
                             ssv2.finUsuarioById(Integer.parseInt(tokens.get(5))) , ssv2.findTecnicoById(Integer.parseInt(tokens.get(6))) ,
                             tokens.get(7));
+
                    /* if (ts.getEstado().equals(Estado.ABIERTO)){
                         ts.setFechaFinalizacion(null);
                     }*/
@@ -110,7 +116,11 @@ public class DAOTicketSoporte2 {
             StringBuffer line = new StringBuffer();
             line.append(t.getId()).append(",");
             line.append(t.getFechaCreacion()).append(",");
-            line.append(t.getFechaFinalizacion()).append(",");
+             if (t.getFechaFinalizacion() != null){
+                 line.append(t.getFechaFinalizacion()).append(",");
+             }else {
+                 line.append("null,");
+             }
             line.append(t.getEstado()).append(",");
             line.append(t.getPrioridad()).append(",");
             line.append(t.getSolicitante().getId()).append(",");

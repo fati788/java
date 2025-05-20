@@ -15,9 +15,9 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
 
-        ServecioSopotttte2 svs = new ServecioSopotttte2();
+
         try {
-            svs = DAOTicketSoporte2.cargarCSV();
+            ServecioSopotttte2 svs =DAOTicketSoporte2.cargarCSV();
             /*svs.getUsuarios().add(new Usuario(101 , "faty" , "El" , "faty@gmail.com" ,"12123", LocalDate.now()));
             svs.getUsuarios().forEach(System.out::println);
 
@@ -42,7 +42,7 @@ public class App {
                 System.out.println("6.Eliminar ticket soporte");
                 System.out.println("7.Salir y  Grabar datos");
                 try {
-                    opcion = sc.nextInt();
+                    opcion = Integer.parseInt(sc.nextLine());
                     switch (opcion) {
                         case 1:
                             svs.getTicketsAbbiertos().forEach(System.out::println);
@@ -54,13 +54,13 @@ public class App {
                             break;
                         case 3:
                             System.out.println("Dime un perioridad");
-                            int per = sc.nextInt();
+                            int per =Integer.parseInt(sc.nextLine());
                             System.out.println(svs.getTotalTicketsResueltos(per));
 
                             break;
                         case 4:
                             System.out.println("Dime un perioridad");
-                            int per2 = sc.nextInt();
+                            int per2 = Integer.parseInt(sc.nextLine());
                             System.out.println(svs.getMediaResoulicionTickets(per2));
                             break;
                         case 5:
@@ -68,13 +68,13 @@ public class App {
                             System.out.println("Dime el fecha de Creacion de forma: (yyyy-mm-dd)");
                             LocalDate fechaCreacion = LocalDate.parse(sc.next());
                             System.out.println("Dime un perioridad");
-                            int per3 = sc.nextInt();
+                            int per3 = Integer.parseInt(sc.nextLine());
                             System.out.println("Dime comentarios ");
                             String comentarios = sc.next();
                             System.out.println("Dime un id del usuario");
-                            int inU = sc.nextInt();
+                            int inU = Integer.parseInt(sc.nextLine());
                             System.out.println("Dime un id del tecnico");
-                            int inT = sc.nextInt();
+                            int inT = Integer.parseInt(sc.nextLine());
 
                             svs.addTicketSoporte(fechaCreacion, null, per3, comentarios, svs.finUsuarioById(inU)
                                     , svs.findTecnicoById(inT));
@@ -82,7 +82,7 @@ public class App {
                             break;
                         case 6:
                             System.out.println("Dime el id del Ticket");
-                            int id = sc.nextInt();
+                            int id =Integer.parseInt(sc.nextLine());
                             svs.deleteTick(id);
                             break;
                         case 7:

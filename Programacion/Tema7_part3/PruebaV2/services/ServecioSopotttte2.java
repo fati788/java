@@ -49,12 +49,14 @@ public class ServecioSopotttte2 {
     }
     public void deleteUsuario(int id){
         this.usuarios.removeIf( u -> u.getId().equals(id));
+        ticketSoportes.removeIf(t -> t.getSolicitante().getId().equals(id));
     }
     public void addTecnico(Tecnico t){
         this.tecnicos.add(t);
     }
     public void deleteTecnico(int id){
         this.tecnicos.removeIf(t -> t.getId().equals(id));
+        ticketSoportes.removeIf(t -> t.getAsignado().getId().equals(id));
     }
     public void deleteTick(int id){
         this.ticketSoportes.removeIf(  y -> y.getId().equals(id));
