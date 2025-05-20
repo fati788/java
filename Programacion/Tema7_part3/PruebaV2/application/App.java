@@ -1,9 +1,11 @@
 package Programacion.Tema7_part3.PruebaV2.application;
 
+import Programacion.Tema7_part3.PruebaV2.io.DAOTicketSoporte2;
 import Programacion.Tema7_part3.PruebaV2.io.DAOTicketsSoporte;
 import Programacion.Tema7_part3.PruebaV2.models.Especiadad;
 import Programacion.Tema7_part3.PruebaV2.models.Tecnico;
 import Programacion.Tema7_part3.PruebaV2.models.Usuario;
+import Programacion.Tema7_part3.PruebaV2.services.ServecioSopotttte2;
 import Programacion.Tema7_part3.PruebaV2.services.ServicioSoporte;
 
 import java.io.IOException;
@@ -13,18 +15,18 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
 
-        ServicioSoporte svs = new ServicioSoporte();
+        ServecioSopotttte2 svs = new ServecioSopotttte2();
         try {
-            svs = DAOTicketsSoporte.cargarCSV();
-            /*svs.getUsuarios().add(new Usuario(31 , "faty" , "El" , "faty@gmail.com" ,"12123", LocalDate.now()));
+            svs = DAOTicketSoporte2.cargarCSV();
+            /*svs.getUsuarios().add(new Usuario(101 , "faty" , "El" , "faty@gmail.com" ,"12123", LocalDate.now()));
             svs.getUsuarios().forEach(System.out::println);
 
             System.out.println("---------------------Tecnicos----------------");
-            svs.getTecnicos().add(new Tecnico(32 , "Faty" , "Aoula" , "Faty@gmail.com" , "3123456" , Especiadad.ALBANILERIA , 3));
+            svs.getTecnicos().add(new Tecnico(32, "Faty" , "Aoula" , "Faty@gmail.com" , "3123456" , Especiadad.INFORMATICA , 3));
             svs.getTecnicos().forEach(System.out::println);
             System.out.println("-------------Ticketes-----------------------");
             svs.getTicketSoportes().forEach(System.out::println);
-            DAOTicketsSoporte.grabarCSV(svs);*/
+             DAOTicketSoporte2.grabarCSV(svs);*/
 
             Scanner sc = new Scanner(System.in);
             int opcion = 0;
@@ -43,7 +45,7 @@ public class App {
                     opcion = sc.nextInt();
                     switch (opcion) {
                         case 1:
-                            svs.getTicketsAbiertos().forEach(System.out::println);
+                            svs.getTicketsAbbiertos().forEach(System.out::println);
                             break;
                         case 2:
                             svs.getTecnicosGroupByEspecialidad().forEach((k, v) -> {
@@ -59,7 +61,7 @@ public class App {
                         case 4:
                             System.out.println("Dime un perioridad");
                             int per2 = sc.nextInt();
-                            System.out.println(svs.getMediaResolucionTickets(per2));
+                            System.out.println(svs.getMediaResoulicionTickets(per2));
                             break;
                         case 5:
 
@@ -74,18 +76,18 @@ public class App {
                             System.out.println("Dime un id del tecnico");
                             int inT = sc.nextInt();
 
-                            svs.addTicketSoporte(fechaCreacion, null, per3, comentarios, svs.buscarUsuario(inU)
-                                    , svs.buscarTechnico(inT));
+                            svs.addTicketSoporte(fechaCreacion, null, per3, comentarios, svs.finUsuarioById(inU)
+                                    , svs.findTecnicoById(inT));
 
                             break;
                         case 6:
                             System.out.println("Dime el id del Ticket");
                             int id = sc.nextInt();
-                            svs.deleteTicketSoporte(id);
+                            svs.deleteTick(id);
                             break;
                         case 7:
                             System.out.println("Adios");
-                            DAOTicketsSoporte.grabarCSV(svs);
+                            DAOTicketSoporte2.grabarCSV(svs);
                             break;
                         default:
                             System.out.println("Error opcion Invalida");
