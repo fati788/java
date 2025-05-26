@@ -48,7 +48,7 @@ public class DAOFinca {
               List<Finca> fincas1 = new ArrayList<>();
 
         try {
-            Files.lines(Paths.get("resources/fincas.csv"))
+            Files.lines(Paths.get("resourcess/fincas.csv"))
                     .forEach(line -> {
                         List<String> tokens = Arrays.asList(line.split(","));
                         Finca f = new Finca(Integer.valueOf(tokens.get(0)) ,tokens.get(1),Double.parseDouble(tokens.get(2)),

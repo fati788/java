@@ -16,7 +16,7 @@ public class FileUtils {
 
         //LEEEEEEEER LOCALIZACIONES
 
-        Files.lines(Paths.get("resources/local.csv"))
+        Files.lines(Paths.get("resourcess/local.csv"))
                 .forEach(line -> {
                     List<String>tokens = Arrays.asList(line.split(","));
                     Localizacion l = new Localizacion(Long.valueOf(tokens.get(0)),
@@ -27,7 +27,7 @@ public class FileUtils {
 
 
         //LEEEER MATERIALES
-        Files.lines(Paths.get("resources/material.csv"))
+        Files.lines(Paths.get("resourcess/material.csv"))
                 .forEach(line -> {
                     List<String>tokens = Arrays.asList(line.split(","));
                     Material m = new Material(tokens.get(0) , tokens.get(1),

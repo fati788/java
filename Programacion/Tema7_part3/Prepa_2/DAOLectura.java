@@ -2,7 +2,6 @@ package Programacion.Tema7_part3.Prepa_2;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
@@ -39,7 +38,7 @@ public class DAOLectura {
         });
 
         try {
-            Files.write(Paths.get("resources/lecturas.csv") , lineasLectura ,
+            Files.write(Paths.get("resourcess/lecturas.csv") , lineasLectura ,
                     StandardOpenOption.CREATE , StandardOpenOption.WRITE ,
                     StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
@@ -52,7 +51,7 @@ public class DAOLectura {
 
           List<Lectura> lecturas1 = new ArrayList<>();
         try {
-            Files.lines(Paths.get("resources/lecturas.csv"))
+            Files.lines(Paths.get("resourcess/lecturas.csv"))
                     .forEach(line -> {
                         List<String> tokens = Arrays.asList(line.split(","));
 

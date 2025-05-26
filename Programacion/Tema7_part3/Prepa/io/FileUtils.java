@@ -16,7 +16,7 @@ public class FileUtils {
         Set<Material> materials = new HashSet<>();
        //---------------------Leer Localizaciones-------------//
 
-        Files.lines(Paths.get("resources/local.csv"))
+        Files.lines(Paths.get("resourcess/local.csv"))
                 .forEach(line -> {
                     List<String> tokens = Arrays.asList(line.split(","));
                     Localizacion loca = new Localizacion(Long.parseLong(tokens.get(0)) , tokens.get(1), tokens.get(2) );
@@ -26,7 +26,7 @@ public class FileUtils {
         //--------Leeeeeeer Materiales------------//
         //-----------Primero hacer un metodo buscar para buscar una loca
 
-       Files.lines(Paths.get("resources/material.csv"))
+       Files.lines(Paths.get("resourcess/material.csv"))
                .forEach(line -> {
                    List<String> tokens = Arrays.asList(line.split(","));
                    Material mat = new Material(tokens.get(0) , tokens.get(1) , tokens.get(2), Estado.valueOf(tokens.get(3))
@@ -41,7 +41,7 @@ public class FileUtils {
 
         List<Localizacion> localizaciones = new ArrayList<>();
 
-        Files.lines(Paths.get("resources/local.csv"))
+        Files.lines(Paths.get("resourcess/local.csv"))
                 .forEach(line -> {
                     List<String> tokens = Arrays.asList(line.split(","));
                     Localizacion loca = new Localizacion(Long.parseLong(tokens.get(0)) , tokens.get(1), tokens.get(2) );
@@ -76,7 +76,7 @@ public class FileUtils {
 
        });
 
-       Files.write(Paths.get("resources/material.csv") , lines
+       Files.write(Paths.get("resourcess/material.csv") , lines
        , StandardOpenOption.CREATE, StandardOpenOption.WRITE ,
                StandardOpenOption.TRUNCATE_EXISTING);
 

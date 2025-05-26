@@ -17,7 +17,7 @@ public class DAOTicketsSoporte {
         ServicioSoporte ss = new ServicioSoporte();
 
 
-        Files.lines(Paths.get("resources/ussuarios.csv"))
+        Files.lines(Paths.get("resourcess/ussuarios.csv"))
                 .forEach(line -> {
                     List<String> tokens = Arrays.asList(line.split(","));
                     Usuario u = new Usuario(Integer.valueOf(tokens.get(0)) , tokens.get(1),tokens.get(2) ,
@@ -26,7 +26,7 @@ public class DAOTicketsSoporte {
 
                 });
 
-        Files.lines(Paths.get("resources/tecnicos.csv"))
+        Files.lines(Paths.get("resourcess/tecnicos.csv"))
         .forEach(line -> {
             List<String> tokens = Arrays.asList(line.split(","));
             Tecnico t = new Tecnico(Integer.valueOf(tokens.get(0)) , tokens.get(1) , tokens.get(2),
@@ -35,7 +35,7 @@ public class DAOTicketsSoporte {
 
         });
 
-        Files.lines(Paths.get("resources/TicketSoporte.csv"))
+        Files.lines(Paths.get("resourcess/TicketSoporte.csv"))
                 .forEach(line -> {
                     List<String> tokens = Arrays.asList(line.split(","));
 
@@ -70,7 +70,7 @@ public class DAOTicketsSoporte {
 
         });
 
-        Files.write(Paths.get("resources/ussuarios.csv"),linesUser ,
+        Files.write(Paths.get("resourcess/ussuarios.csv"),linesUser ,
                 StandardOpenOption.CREATE , StandardOpenOption.WRITE ,
                 StandardOpenOption.TRUNCATE_EXISTING);
 
@@ -91,7 +91,7 @@ public class DAOTicketsSoporte {
             linesTechnico.add(line.toString());
 
         });
-        Files.write(Paths.get("resources/tecnicos.csv") , linesTechnico ,
+        Files.write(Paths.get("resourcess/tecnicos.csv") , linesTechnico ,
                 StandardOpenOption.CREATE , StandardOpenOption.WRITE , StandardOpenOption.TRUNCATE_EXISTING);
 
 
@@ -115,7 +115,7 @@ public class DAOTicketsSoporte {
             linesTicketSoporte.add(linetic.toString());
 
         });
-        Files.write(Paths.get("resources/TicketSoporte.csv") , linesTicketSoporte,
+        Files.write(Paths.get("resourcess/TicketSoporte.csv") , linesTicketSoporte,
                 StandardOpenOption.CREATE , StandardOpenOption.WRITE , StandardOpenOption.TRUNCATE_EXISTING);
 
 

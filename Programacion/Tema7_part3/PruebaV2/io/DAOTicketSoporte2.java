@@ -5,7 +5,6 @@ import Programacion.Tema7_part3.PruebaV2.services.ServecioSopotttte2;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
@@ -19,7 +18,7 @@ public class DAOTicketSoporte2 {
         ServecioSopotttte2 ssv2 = new ServecioSopotttte2();
 
         //LEER LOS USUARIOS
-        Files.lines(Paths.get("resources/usuarios2024.csv"))
+        Files.lines(Paths.get("resourcess/usuarios2024.csv"))
                 .forEach( line -> {
                     List<String> tokens = Arrays.asList(line.split(","));
                     Usuario u = new Usuario(Integer.valueOf(tokens.get(0)) , tokens.get(1) , tokens.get(2) , tokens.get(3),
@@ -29,7 +28,7 @@ public class DAOTicketSoporte2 {
 
         //LEER TECNICOS
 
-        Files.lines(Paths.get("resources/tecnico2024.csv"))
+        Files.lines(Paths.get("resourcess/tecnico2024.csv"))
                 .forEach(line -> {
                     List<String> tokens = Arrays.asList(line.split(","));
 
@@ -39,7 +38,7 @@ public class DAOTicketSoporte2 {
                 });
 
         //LEER TICKETS
-        Files.lines(Paths.get("resources/tickets2.csv"))
+        Files.lines(Paths.get("resourcess/tickets2.csv"))
                 .forEach(line -> {
                     List<String> tokens = Arrays.asList(line.split(","));
 
@@ -84,7 +83,7 @@ public class DAOTicketSoporte2 {
         });
 
 
-        Files.write(Paths.get("resources/usuarios2024.csv") , lineUsers , StandardOpenOption.CREATE,
+        Files.write(Paths.get("resourcess/usuarios2024.csv") , lineUsers , StandardOpenOption.CREATE,
                 StandardOpenOption.WRITE , StandardOpenOption.TRUNCATE_EXISTING);
 
 
@@ -105,7 +104,7 @@ public class DAOTicketSoporte2 {
             linesTecs.add(line.toString());
         });
 
-        Files.write(Paths.get("resources/tecnico2024.csv"), linesTecs,
+        Files.write(Paths.get("resourcess/tecnico2024.csv"), linesTecs,
                 StandardOpenOption.CREATE, StandardOpenOption.WRITE,
                 StandardOpenOption.TRUNCATE_EXISTING);
 
@@ -131,7 +130,7 @@ public class DAOTicketSoporte2 {
 
         });
 
-        Files.write(Paths.get("resources/tickets2.csv") , linesTickets ,
+        Files.write(Paths.get("resourcess/tickets2.csv") , linesTickets ,
                 StandardOpenOption.CREATE , StandardOpenOption.WRITE,
                 StandardOpenOption.TRUNCATE_EXISTING);
 
